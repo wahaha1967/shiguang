@@ -1,0 +1,23 @@
+[project]
+name = "shiguang-study"
+version = "3.0.0"
+description = "Local-only AI bridge and packaging for the Shiguang Study Room workbench"
+readme = "README.md"
+requires-python = ">=3.9"
+# The bridge runs on the Python standard library only. Nothing to install.
+dependencies = []
+
+[project.scripts]
+shiguang-study = "shiguang_study.bridge:main"
+
+[build-system]
+requires = ["uv_build>=0.13.7,<0.14"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = []
+
+[tool.uv]
+# Install the project into the environment so that `uv run shiguang-study`
+# and `uv run python -m shiguang_study` both work.
+package = true
