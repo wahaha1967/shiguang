@@ -5,7 +5,11 @@ description = "Local-only AI bridge and packaging for the Shiguang Study Room wo
 readme = "README.md"
 requires-python = ">=3.9"
 # The bridge runs on the Python standard library only. Nothing to install.
-dependencies = []
+dependencies = [
+    "fastapi>=0.128.8",
+    "sqlalchemy>=2.0.57",
+    "uvicorn>=0.39.0",
+]
 
 [project.scripts]
 shiguang-study = "shiguang_study.bridge:main"
