@@ -52,8 +52,7 @@ wails3 task serve           # 仅本机 HTTP（127.0.0.1:4312），调试用
 ```
 
 构建需 Go 1.26+（`CGO_ENABLED=0`）与 Wails v3.1.0 CLI；运行需 Windows 10/11 x64 + WebView2。
-本地 Go 低于 1.26 也可构建：`desktop/go.mod` 声明 `go 1.26.0`，`GOTOOLCHAIN=auto` 会在进入 `desktop` 目录时自动切换到所需工具链（如 go1.26.0），无需手动升级 Go。
-Wails v3 CLI 一次性安装：`go install github.com/wailsapp/wails/v3/cmd/wails3@v3.1.0`；二进制落在 `$(go env GOPATH)\bin`，该目录必须在 `PATH` 中，否则 `wails3` 无法被识别。
+环境准备（Go 工具链自动切换、`wails3` 安装与 PATH）见 `desktop/README.md` 的 Requirements。
 双击 `src/app/index.html`（`file://`）是只读预览：能看不能存。
 
 ## 红线（违反即缺陷）
