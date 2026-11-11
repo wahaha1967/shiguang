@@ -1,0 +1,226 @@
+{
+  "endpoints": [
+    {
+      "value": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "provider": "qwen"
+    },
+    {
+      "value": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+      "provider": "qwen"
+    },
+    {
+      "value": "https://dashscope.aliyuncs.com/compatible-mode/v1/",
+      "provider": "qwen"
+    },
+    {
+      "value": "https://biz-123.aliyuncs.com/compatible-mode/v1",
+      "provider": "qwen"
+    },
+    {
+      "value": "https://api.deepseek.com",
+      "provider": "deepseek"
+    },
+    {
+      "value": "https://api.deepseek.com/",
+      "provider": "deepseek"
+    },
+    {
+      "value": "https://api.deepseek.com/v1",
+      "provider": "deepseek"
+    },
+    {
+      "value": "",
+      "error": "仅接受服务商官方 HTTPS 接口基础地址"
+    },
+    {
+      "value": null,
+      "error": "接口地址不能为空"
+    },
+    {
+      "value": 123,
+      "error": "接口地址不能为空"
+    },
+    {
+      "value": "http://dashscope.aliyuncs.com/compatible-mode/v1",
+      "error": "仅接受服务商官方 HTTPS 接口基础地址"
+    },
+    {
+      "value": "https://dashscope.aliyuncs.com:8443/compatible-mode/v1",
+      "error": "仅接受服务商官方 HTTPS 接口基础地址"
+    },
+    {
+      "value": "https://user:pw@api.deepseek.com",
+      "error": "仅接受服务商官方 HTTPS 接口基础地址"
+    },
+    {
+      "value": "https://api.deepseek.com/v1?x=1",
+      "error": "仅接受服务商官方 HTTPS 接口基础地址"
+    },
+    {
+      "value": "https://api.deepseek.com/v1#frag",
+      "error": "仅接受服务商官方 HTTPS 接口基础地址"
+    },
+    {
+      "value": "https://api.openai.com/v1",
+      "error": "仅接受百炼或 DeepSeek 官方接口基础地址"
+    },
+    {
+      "value": "https://dashscope.aliyuncs.com/compatible-mode/v2",
+      "error": "仅接受百炼或 DeepSeek 官方接口基础地址"
+    },
+    {
+      "value": "https://aliyuncs.com.evil.example/compatible-mode/v1",
+      "error": "仅接受百炼或 DeepSeek 官方接口基础地址"
+    }
+  ],
+  "upstream": [
+    {
+      "name": "qwen",
+      "endpoint": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "body": {
+        "model": "qwen-plus",
+        "messages": [
+          {
+            "role": "user",
+            "content": "hi"
+          }
+        ],
+        "response_format": {
+          "type": "json_object"
+        },
+        "max_tokens": 8192,
+        "temperature": 0.7
+      },
+      "status": 200,
+      "sent": {
+        "model": "qwen-plus",
+        "messages": [
+          {
+            "role": "user",
+            "content": "hi"
+          }
+        ],
+        "response_format": {
+          "type": "json_object"
+        },
+        "max_tokens": 8192,
+        "enable_thinking": false,
+        "stream": false
+      },
+      "result": {
+        "choices": [
+          {
+            "message": {
+              "content": "{}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "deepseek",
+      "endpoint": "https://api.deepseek.com",
+      "body": {
+        "model": "deepseek-flash",
+        "messages": [
+          {
+            "role": "user",
+            "content": "hi"
+          }
+        ],
+        "response_format": {
+          "type": "json_object"
+        },
+        "max_tokens": 8192,
+        "temperature": 0.7
+      },
+      "status": 200,
+      "sent": {
+        "model": "deepseek-flash",
+        "messages": [
+          {
+            "role": "user",
+            "content": "hi"
+          }
+        ],
+        "response_format": {
+          "type": "json_object"
+        },
+        "max_tokens": 8192,
+        "thinking": {
+          "type": "disabled"
+        },
+        "stream": false
+      },
+      "result": {
+        "choices": [
+          {
+            "message": {
+              "content": "{}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "oversized",
+      "endpoint": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "body": {
+        "model": "qwen-plus",
+        "messages": [
+          {
+            "role": "user",
+            "content": "hi"
+          }
+        ],
+        "response_format": {
+          "type": "json_object"
+        },
+        "max_tokens": 8192,
+        "temperature": 0.7
+      },
+      "status": 502,
+      "error_message": "模型响应过大，请减少题量"
+    },
+    {
+      "name": "upstream-401",
+      "endpoint": "https://api.deepseek.com",
+      "body": {
+        "model": "qwen-plus",
+        "messages": [
+          {
+            "role": "user",
+            "content": "hi"
+          }
+        ],
+        "response_format": {
+          "type": "json_object"
+        },
+        "max_tokens": 8192,
+        "temperature": 0.7
+      },
+      "status": 401,
+      "error_message": "invalid api key [密钥已隐藏]"
+    },
+    {
+      "name": "network",
+      "endpoint": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "body": {
+        "model": "qwen-plus",
+        "messages": [
+          {
+            "role": "user",
+            "content": "hi"
+          }
+        ],
+        "response_format": {
+          "type": "json_object"
+        },
+        "max_tokens": 8192,
+        "temperature": 0.7
+      },
+      "status": 502,
+      "error_message": "无法连接所选服务商，请检查网络和接口设置后重试"
+    }
+  ]
+}

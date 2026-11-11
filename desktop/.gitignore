@@ -1,0 +1,7 @@
+/build/bin/
+/dist/
+/.env
+*.db
+*.db-wal
+*.db-shm
+*.syso

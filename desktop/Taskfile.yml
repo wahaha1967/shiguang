@@ -1,0 +1,46 @@
+version: '3'
+
+env:
+  CGO_ENABLED: '0'
+  GOTOOLCHAIN: go1.26.10
+
+vars:
+  BUILD_DIR: build/bin
+  EXE_NAME: shiguang-study.exe
+  APP_NAME: 拾光自习室
+
+tasks:
+  default:
+    desc: Run the test suite
+    cmds:
+      - task: test
+
+  test:
+    desc: Run all Go tests
+    cmds:
+      - go test ./...
+
+  vet:
+    desc: Run go vet
+    cmds:
+      - go vet ./...
+
+  windows:build:
+    desc: Generate Windows resources and build the desktop executable
+    deps: [test]
+    cmds:
+      - powershell -NoProfile -Command "Remove-Item -Path 'cmd/study/*.syso' -ErrorAction SilentlyContinue"
+      - wails3 generate syso -arch amd64 -icon build/windows/icon.ico -manifest build/windows/app.manifest -info build/windows/info.json -out cmd/study/study_windows_amd64.syso
+      - powershell -NoProfile -Command "New-Item -ItemType Directory -Force -Path '{{.BUILD_DIR}}' | Out-Null"
+      - go build -trimpath -ldflags "-s -w -H=windowsgui" -o "{{.BUILD_DIR}}/{{.EXE_NAME}}" ./cmd/study
+
+  serve:
+    desc: Start the loopback HTTP service without the desktop window
+    cmds:
+      - go run ./cmd/study --serve --port 4312
+
+  package:
+    desc: Build and produce the distributable zip
+    deps: [windows:build]
+    cmds:
+      - powershell -NoProfile -Command "New-Item -ItemType Directory -Force -Path 'dist/{{.APP_NAME}}' | Out-Null; Copy-Item '{{.BUILD_DIR}}/{{.EXE_NAME}}' 'dist/{{.APP_NAME}}/{{.APP_NAME}}.exe' -Force; Copy-Item '使用说明.txt' 'dist/{{.APP_NAME}}/使用说明.txt' -Force; Compress-Archive -Path 'dist/{{.APP_NAME}}/*' -DestinationPath 'dist/{{.APP_NAME}}-windows-x64.zip' -Force"

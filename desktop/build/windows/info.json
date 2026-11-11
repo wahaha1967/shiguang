@@ -1,0 +1,17 @@
+{
+	"fixed": {
+		"file_version": "3.0.0.0",
+		"product_version": "3.0.0.0",
+		"type": "app"
+	},
+	"info": {
+		"0409": {
+			"ProductVersion": "3.0.0",
+			"CompanyName": "Shiguang Study Room",
+			"FileDescription": "拾光自习室 · 错题本与间隔复习",
+			"LegalCopyright": "© 2026 Shiguang Study Room",
+			"ProductName": "拾光自习室",
+			"Comments": "错题本 · 间隔复习 · 拍照录题 · AI 举一反三"
+		}
+	}
+}

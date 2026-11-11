@@ -7,14 +7,12 @@ Updated: 2026-11-11.
 
 ## 1. How to open it
 
-Start the FastAPI service so study data can be saved:
+On Windows, double-click `拾光自习室.exe`; it opens its own window and runs a local loopback
+service that saves your study data. Keep the window open while you use the app.
 
-1. From the source tree: `uv run shiguang-study`.
-2. The browser opens <http://127.0.0.1:4312/>. Keep the service window open.
-3. Study data is stored in the local SQLite database, not in the browser.
-
-The AI features need that service: the browser never talks to the provider itself. The
-provider key is encrypted by the service and stored in the local database.
+1. Study data is stored in the local SQLite database, not in the browser.
+2. The AI features need that local service: the page never talks to the provider itself.
+3. The provider key is encrypted by the service and stored in the local database.
 
 For the AI features, configure the provider below in 「偏好与数据」 or the AI settings on the
 「拍照录题」 / 「举一反三」 pages.

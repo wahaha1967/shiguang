@@ -7,17 +7,10 @@ A local workbench for turning wrong answers into mastered skills.
 
 ## How to open it
 
-Start the FastAPI service, then open <http://127.0.0.1:4312/> in any desktop browser:
-
-```bash
-uv run shiguang-study
-```
-
-Add `--open` to have the service open the browser for you once it is ready:
-
-```bash
-uv run shiguang-study --open
-```
+On Windows, double-click `拾光自习室.exe`. The app opens its own window and runs a local
+loopback service to save your data — there is no browser tab to manage and nothing to
+install beyond the WebView2 runtime (bundled with Windows 11). Keep the window open while
+you use it. See `desktop/使用说明.txt` for the full Windows instructions.
 
 Study data is stored in the local SQLite database, not in the browser. Opening
 `src/app/index.html` directly is a read-only preview: it shows the sample questions, but
@@ -76,6 +69,7 @@ reload keeps it and the browser never sees it again.
 ## File independence
 
 The app needs the local service to save data. The HTML is still a single file, but on its
-own it is a read-only preview. The FastAPI backend is managed by uv.
+own it is a read-only preview. The Go desktop app embeds the page and runs the local
+loopback service itself; no Python, uv, or Node runtime is needed.
 
 Read [ai-guide.md](ai-guide.md) before using the AI features.

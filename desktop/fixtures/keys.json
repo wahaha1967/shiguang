@@ -1,0 +1,52 @@
+{
+  "samples": [
+    {
+      "secret": "fixture-secret",
+      "plaintext": "sk-FIXTURE0123456789ABCDEF",
+      "ciphertext": "Ulr5WKeXNLCEOF1cEEuuq1b09hlArrl1t4+njTtKrhkDpWj9twrdCIFYWFAydPc++CTVCvMI",
+      "preview": "sk-F****CDEF"
+    },
+    {
+      "secret": "fixture-secret",
+      "plaintext": "sk-abcdefghijklmnop",
+      "ciphertext": "knTOn7JopxbLBhQCybQJiaOyd8ldNebMz+ck3IJgXJHeUCyTA5pQKaqqb/rdT9k=",
+      "preview": "sk-a****mnop"
+    },
+    {
+      "secret": "fixture-secret",
+      "plaintext": "sk-short",
+      "ciphertext": "WaZh8v9SkJwVdeAPEZczqhJvDtPDygt+kBPYEg9Dy3SH9R/2",
+      "preview": "****"
+    },
+    {
+      "secret": "fixture-secret",
+      "plaintext": "aaaaaaaaaaaa",
+      "ciphertext": "DxGB5H9V8+KqtJ6kTY/2QUGG6Vnsgj+bC0sh8uKTQhi1H7O/avKanA==",
+      "preview": "****"
+    },
+    {
+      "secret": "fixture-secret",
+      "plaintext": "中文密钥示例0123456789",
+      "ciphertext": "EJOXyCwQjaRysFH92mY/bU72m+KLD/i3XTpfNe2LypDG++8i+Z3lXOpd67aCuRbOG5gF3DE8lvg=",
+      "preview": "中文密钥****6789"
+    }
+  ],
+  "broken": [
+    {
+      "ciphertext": "",
+      "error": "密钥数据损坏，无法解密"
+    },
+    {
+      "ciphertext": "not base64!!",
+      "error": "密钥数据损坏，无法解密"
+    },
+    {
+      "ciphertext": "c2hvcnQ=",
+      "error": "密钥数据损坏，无法解密"
+    },
+    {
+      "ciphertext": "fdaRX3EH1M2d70Ge600MIBz5C2ksjomiLgkVH7+pE2mQJj49dkid6xP7d1YqaUg=",
+      "error": "密钥解密失败，请检查 .env 中的加密串是否被改动"
+    }
+  ]
+}

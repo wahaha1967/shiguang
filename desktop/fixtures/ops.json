@@ -1,0 +1,1935 @@
+{
+  "cases": [
+    {
+      "name": "questions-upsert-basic",
+      "setup": [],
+      "ops": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "ord": 3,
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [
+          {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        ],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": true
+      }
+    },
+    {
+      "name": "questions-upsert-full",
+      "setup": [],
+      "ops": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "ord": 0,
+          "row": {
+            "id": "q-1",
+            "subject": "物理",
+            "title": "自由落体",
+            "answer": "g",
+            "reason": "忘了",
+            "tag": "力学",
+            "cause": "粗心",
+            "difficulty": "中",
+            "image": "data:image/png;base64,AA==",
+            "favorite": true,
+            "stage": 4,
+            "due": "2026-12-01",
+            "created": "2026-11-01",
+            "demo": true
+          }
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [
+          {
+            "id": "q-1",
+            "subject": "物理",
+            "title": "自由落体",
+            "answer": "g",
+            "reason": "忘了",
+            "tag": "力学",
+            "cause": "粗心",
+            "difficulty": "中",
+            "image": "data:image/png;base64,AA==",
+            "favorite": true,
+            "stage": 4,
+            "due": "2026-12-01",
+            "created": "2026-11-01",
+            "demo": true
+          }
+        ],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": true
+      }
+    },
+    {
+      "name": "questions-trash",
+      "setup": [],
+      "ops": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "ord": 0,
+          "trashed": true,
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [
+          {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        ],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": true
+      }
+    },
+    {
+      "name": "questions-update",
+      "setup": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        }
+      ],
+      "ops": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "ord": 9,
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1=?",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 2,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [
+          {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1=?",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 2,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        ],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": true
+      }
+    },
+    {
+      "name": "questions-delete",
+      "setup": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        }
+      ],
+      "ops": [
+        {
+          "t": "questions",
+          "op": "delete",
+          "id": "q-1"
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": false
+      }
+    },
+    {
+      "name": "logs-add",
+      "setup": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        }
+      ],
+      "ops": [
+        {
+          "t": "logs",
+          "op": "append",
+          "ord": 0,
+          "row": {
+            "id": "l-1",
+            "date": "2026-11-10",
+            "at": "08:30",
+            "type": "add",
+            "label": "记录新题",
+            "points": 3,
+            "qid": "q-1"
+          }
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [
+          {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        ],
+        "trash": [],
+        "logs": [
+          {
+            "id": "l-1",
+            "date": "2026-11-10",
+            "at": "08:30",
+            "type": "add",
+            "label": "记录新题",
+            "points": 3.0,
+            "qid": "q-1"
+          }
+        ],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": true
+      }
+    },
+    {
+      "name": "logs-review",
+      "setup": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        }
+      ],
+      "ops": [
+        {
+          "t": "logs",
+          "op": "upsert",
+          "ord": 0,
+          "row": {
+            "id": "l-2",
+            "date": "2026-11-10",
+            "at": "09:00",
+            "type": "review",
+            "label": "复习",
+            "points": 5,
+            "qid": "q-1",
+            "grade": "good"
+          }
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [
+          {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        ],
+        "trash": [],
+        "logs": [
+          {
+            "id": "l-2",
+            "date": "2026-11-10",
+            "at": "09:00",
+            "type": "review",
+            "label": "复习",
+            "points": 5.0,
+            "qid": "q-1",
+            "grade": "good"
+          }
+        ],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": true
+      }
+    },
+    {
+      "name": "logs-focus",
+      "setup": [],
+      "ops": [
+        {
+          "t": "logs",
+          "op": "upsert",
+          "ord": 0,
+          "row": {
+            "id": "l-3",
+            "date": "2026-11-10",
+            "at": "10:00",
+            "type": "focus",
+            "label": "专注",
+            "points": 12.5,
+            "minutes": 12.5
+          }
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [
+          {
+            "id": "l-3",
+            "date": "2026-11-10",
+            "at": "10:00",
+            "type": "focus",
+            "label": "专注",
+            "points": 12.5,
+            "minutes": 12.5
+          }
+        ],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": true
+      }
+    },
+    {
+      "name": "logs-delete",
+      "setup": [
+        {
+          "t": "logs",
+          "op": "upsert",
+          "row": {
+            "id": "l-1",
+            "date": "2026-11-10",
+            "at": "08:30",
+            "type": "add",
+            "label": "记录新题",
+            "points": 3,
+            "qid": "q-1"
+          }
+        }
+      ],
+      "ops": [
+        {
+          "t": "logs",
+          "op": "delete",
+          "id": "l-1"
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": false
+      }
+    },
+    {
+      "name": "rewards-upsert",
+      "setup": [],
+      "ops": [
+        {
+          "t": "rewards",
+          "op": "upsert",
+          "ord": 1,
+          "row": {
+            "id": "r-1",
+            "name": "一杯奶茶",
+            "cost": 30
+          }
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [],
+        "rewards": [
+          {
+            "id": "r-1",
+            "name": "一杯奶茶",
+            "cost": 30
+          }
+        ],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": true
+      }
+    },
+    {
+      "name": "rewards-delete",
+      "setup": [
+        {
+          "t": "rewards",
+          "op": "upsert",
+          "row": {
+            "id": "r-1",
+            "name": "一杯奶茶",
+            "cost": 30
+          }
+        }
+      ],
+      "ops": [
+        {
+          "t": "rewards",
+          "op": "delete",
+          "id": "r-1"
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": false
+      }
+    },
+    {
+      "name": "redemptions-upsert",
+      "setup": [],
+      "ops": [
+        {
+          "t": "redemptions",
+          "op": "upsert",
+          "ord": 0,
+          "row": {
+            "id": "rd-1",
+            "name": "看电影",
+            "cost": 50,
+            "date": "2026-11-10"
+          }
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [
+          {
+            "id": "rd-1",
+            "name": "看电影",
+            "cost": 50,
+            "date": "2026-11-10"
+          }
+        ],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": true
+      }
+    },
+    {
+      "name": "redemptions-delete",
+      "setup": [
+        {
+          "t": "redemptions",
+          "op": "upsert",
+          "row": {
+            "id": "rd-1",
+            "name": "看电影",
+            "cost": 50,
+            "date": "2026-11-10"
+          }
+        }
+      ],
+      "ops": [
+        {
+          "t": "redemptions",
+          "op": "delete",
+          "id": "rd-1"
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": false
+      }
+    },
+    {
+      "name": "prefs-replace",
+      "setup": [],
+      "ops": [
+        {
+          "t": "prefs",
+          "op": "replace",
+          "row": {
+            "name": "同学",
+            "goal": 7,
+            "minutes": 30,
+            "theme": "night"
+          }
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 7,
+          "minutes": 30,
+          "theme": "night"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": true
+      }
+    },
+    {
+      "name": "timer-replace",
+      "setup": [],
+      "ops": [
+        {
+          "t": "timer",
+          "op": "replace",
+          "row": {
+            "running": true,
+            "remaining": 1500.5,
+            "duration": 1500.5,
+            "end": 1791600000000
+          }
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": {
+          "running": true,
+          "remaining": 1500.5,
+          "duration": 1500.5,
+          "end": 1791600000000.0
+        },
+        "aiSets": [],
+        "initialized": true
+      }
+    },
+    {
+      "name": "timer-delete",
+      "setup": [
+        {
+          "t": "timer",
+          "op": "replace",
+          "row": {
+            "running": false,
+            "remaining": 60,
+            "duration": 60
+          }
+        }
+      ],
+      "ops": [
+        {
+          "t": "timer",
+          "op": "replace",
+          "row": null
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": false
+      }
+    },
+    {
+      "name": "ai-config-replace",
+      "setup": [],
+      "ops": [
+        {
+          "t": "aiConfig",
+          "op": "replace",
+          "row": {
+            "provider": "deepseek",
+            "base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+            "vision": "qwen3-vl-plus",
+            "text": "qwen-plus",
+            "deepseekBase": "https://api.deepseek.com",
+            "deepseekVision": "deepseek-flash",
+            "deepseekText": "deepseek-flash"
+          }
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "aiConfig": {
+          "provider": "deepseek",
+          "base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+          "vision": "qwen3-vl-plus",
+          "text": "qwen-plus",
+          "deepseekBase": "https://api.deepseek.com",
+          "deepseekVision": "deepseek-flash",
+          "deepseekText": "deepseek-flash"
+        },
+        "initialized": true
+      }
+    },
+    {
+      "name": "ai-config-delete",
+      "setup": [
+        {
+          "t": "aiConfig",
+          "op": "replace",
+          "row": {
+            "provider": "deepseek",
+            "base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+            "vision": "qwen3-vl-plus",
+            "text": "qwen-plus",
+            "deepseekBase": "https://api.deepseek.com",
+            "deepseekVision": "deepseek-flash",
+            "deepseekText": "deepseek-flash"
+          }
+        }
+      ],
+      "ops": [
+        {
+          "t": "aiConfig",
+          "op": "replace",
+          "row": null
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": false
+      }
+    },
+    {
+      "name": "ai-sets-upsert",
+      "setup": [],
+      "ops": [
+        {
+          "t": "aiSets",
+          "op": "upsert",
+          "ord": 0,
+          "row": {
+            "id": "set-1",
+            "created": "2026-11-10",
+            "aiReviewed": true,
+            "sourceId": "q-1",
+            "sourceTitle": "1+1",
+            "subject": "数学",
+            "questions": [
+              {
+                "id": "set-1-q1",
+                "title": "变式一",
+                "answer": "3",
+                "explanation": "因为 1+2",
+                "knowledge": "加法",
+                "note": "",
+                "revealed": false,
+                "grade": ""
+              },
+              {
+                "id": "set-1-q2",
+                "title": "变式二",
+                "answer": "4",
+                "explanation": "因为 2+2",
+                "knowledge": "加法",
+                "note": "注意",
+                "revealed": true,
+                "grade": "good"
+              },
+              {
+                "id": "set-1-q3",
+                "title": "变式三",
+                "answer": "5",
+                "explanation": "因为 2+3",
+                "knowledge": "加法",
+                "note": "",
+                "revealed": false,
+                "grade": "hard"
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [
+          {
+            "id": "set-1",
+            "aiReviewed": true,
+            "sourceId": "q-1",
+            "sourceTitle": "1+1",
+            "subject": "数学",
+            "created": "2026-11-10",
+            "questions": [
+              {
+                "id": "set-1-q1",
+                "title": "变式一",
+                "answer": "3",
+                "explanation": "因为 1+2",
+                "knowledge": "加法",
+                "note": "",
+                "revealed": false,
+                "grade": ""
+              },
+              {
+                "id": "set-1-q2",
+                "title": "变式二",
+                "answer": "4",
+                "explanation": "因为 2+2",
+                "knowledge": "加法",
+                "note": "注意",
+                "revealed": true,
+                "grade": "good"
+              },
+              {
+                "id": "set-1-q3",
+                "title": "变式三",
+                "answer": "5",
+                "explanation": "因为 2+3",
+                "knowledge": "加法",
+                "note": "",
+                "revealed": false,
+                "grade": "hard"
+              }
+            ]
+          }
+        ],
+        "initialized": true
+      }
+    },
+    {
+      "name": "ai-sets-replace-questions",
+      "setup": [
+        {
+          "t": "aiSets",
+          "op": "upsert",
+          "row": {
+            "id": "set-1",
+            "created": "2026-11-10",
+            "aiReviewed": true,
+            "sourceId": "q-1",
+            "sourceTitle": "1+1",
+            "subject": "数学",
+            "questions": [
+              {
+                "id": "set-1-q1",
+                "title": "变式一",
+                "answer": "3",
+                "explanation": "因为 1+2",
+                "knowledge": "加法",
+                "note": "",
+                "revealed": false,
+                "grade": ""
+              },
+              {
+                "id": "set-1-q2",
+                "title": "变式二",
+                "answer": "4",
+                "explanation": "因为 2+2",
+                "knowledge": "加法",
+                "note": "注意",
+                "revealed": true,
+                "grade": "good"
+              },
+              {
+                "id": "set-1-q3",
+                "title": "变式三",
+                "answer": "5",
+                "explanation": "因为 2+3",
+                "knowledge": "加法",
+                "note": "",
+                "revealed": false,
+                "grade": "hard"
+              }
+            ]
+          }
+        }
+      ],
+      "ops": [
+        {
+          "t": "aiSets",
+          "op": "upsert",
+          "ord": 0,
+          "row": {
+            "id": "set-1",
+            "created": "2026-11-10",
+            "aiReviewed": false,
+            "sourceId": "q-1",
+            "sourceTitle": "1+1",
+            "subject": "数学",
+            "questions": [
+              {
+                "id": "set-1-q1",
+                "title": "变式一（新）",
+                "answer": "3",
+                "explanation": "因为 1+2",
+                "knowledge": "加法",
+                "note": "",
+                "revealed": false,
+                "grade": ""
+              },
+              {
+                "id": "set-1-q2",
+                "title": "变式二（新）",
+                "answer": "4",
+                "explanation": "因为 2+2",
+                "knowledge": "加法",
+                "note": "注意",
+                "revealed": true,
+                "grade": "good"
+              },
+              {
+                "id": "set-1-q3",
+                "title": "变式三（新）",
+                "answer": "5",
+                "explanation": "因为 2+3",
+                "knowledge": "加法",
+                "note": "",
+                "revealed": false,
+                "grade": "hard"
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [
+          {
+            "id": "set-1",
+            "aiReviewed": false,
+            "sourceId": "q-1",
+            "sourceTitle": "1+1",
+            "subject": "数学",
+            "created": "2026-11-10",
+            "questions": [
+              {
+                "id": "set-1-q1",
+                "title": "变式一（新）",
+                "answer": "3",
+                "explanation": "因为 1+2",
+                "knowledge": "加法",
+                "note": "",
+                "revealed": false,
+                "grade": ""
+              },
+              {
+                "id": "set-1-q2",
+                "title": "变式二（新）",
+                "answer": "4",
+                "explanation": "因为 2+2",
+                "knowledge": "加法",
+                "note": "注意",
+                "revealed": true,
+                "grade": "good"
+              },
+              {
+                "id": "set-1-q3",
+                "title": "变式三（新）",
+                "answer": "5",
+                "explanation": "因为 2+3",
+                "knowledge": "加法",
+                "note": "",
+                "revealed": false,
+                "grade": "hard"
+              }
+            ]
+          }
+        ],
+        "initialized": true
+      }
+    },
+    {
+      "name": "ai-sets-delete",
+      "setup": [
+        {
+          "t": "aiSets",
+          "op": "upsert",
+          "row": {
+            "id": "set-1",
+            "created": "2026-11-10",
+            "aiReviewed": true,
+            "sourceId": "q-1",
+            "sourceTitle": "1+1",
+            "subject": "数学",
+            "questions": [
+              {
+                "id": "set-1-q1",
+                "title": "变式一",
+                "answer": "3",
+                "explanation": "因为 1+2",
+                "knowledge": "加法",
+                "note": "",
+                "revealed": false,
+                "grade": ""
+              },
+              {
+                "id": "set-1-q2",
+                "title": "变式二",
+                "answer": "4",
+                "explanation": "因为 2+2",
+                "knowledge": "加法",
+                "note": "注意",
+                "revealed": true,
+                "grade": "good"
+              },
+              {
+                "id": "set-1-q3",
+                "title": "变式三",
+                "answer": "5",
+                "explanation": "因为 2+3",
+                "knowledge": "加法",
+                "note": "",
+                "revealed": false,
+                "grade": "hard"
+              }
+            ]
+          }
+        }
+      ],
+      "ops": [
+        {
+          "t": "aiSets",
+          "op": "delete",
+          "id": "set-1"
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": false
+      }
+    },
+    {
+      "name": "reset-clears-data",
+      "setup": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        },
+        {
+          "t": "logs",
+          "op": "upsert",
+          "row": {
+            "id": "l-1",
+            "date": "2026-11-10",
+            "at": "08:30",
+            "type": "add",
+            "label": "记录新题",
+            "points": 3,
+            "qid": "q-1"
+          }
+        },
+        {
+          "t": "prefs",
+          "op": "replace",
+          "row": {
+            "name": "同学",
+            "goal": 7,
+            "minutes": 30,
+            "theme": "night"
+          }
+        },
+        {
+          "t": "aiConfig",
+          "op": "replace",
+          "row": {
+            "provider": "deepseek",
+            "base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+            "vision": "qwen3-vl-plus",
+            "text": "qwen-plus",
+            "deepseekBase": "https://api.deepseek.com",
+            "deepseekVision": "deepseek-flash",
+            "deepseekText": "deepseek-flash"
+          }
+        },
+        {
+          "t": "timer",
+          "op": "replace",
+          "row": {
+            "running": false,
+            "remaining": 1,
+            "duration": 1
+          }
+        }
+      ],
+      "ops": [
+        {
+          "t": "reset",
+          "op": "reset"
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": false
+      }
+    },
+    {
+      "name": "text-limit-accepted",
+      "setup": [],
+      "ops": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        }
+      ],
+      "expected": {
+        "schema": 1,
+        "questions": [
+          {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        ],
+        "trash": [],
+        "logs": [],
+        "rewards": [],
+        "redemptions": [],
+        "prefs": {
+          "name": "同学",
+          "goal": 5,
+          "minutes": 25,
+          "theme": "light"
+        },
+        "timer": null,
+        "aiSets": [],
+        "initialized": true
+      }
+    },
+    {
+      "name": "text-limit-rejected",
+      "setup": [],
+      "ops": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        }
+      ],
+      "error": "title 超过长度上限 10000"
+    },
+    {
+      "name": "int-rejects-float",
+      "setup": [],
+      "ops": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 1.0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        }
+      ],
+      "error": "stage 必须是 0 到 5 之间的整数"
+    },
+    {
+      "name": "stage-out-of-range",
+      "setup": [],
+      "ops": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 6,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        }
+      ],
+      "error": "stage 必须是 0 到 5 之间的整数"
+    },
+    {
+      "name": "bad-date",
+      "setup": [],
+      "ops": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026/11/10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        }
+      ],
+      "error": "due 必须是 YYYY-MM-DD"
+    },
+    {
+      "name": "bad-id",
+      "setup": [],
+      "ops": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "row": {
+            "id": "bad id",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        }
+      ],
+      "error": "id 格式不正确"
+    },
+    {
+      "name": "review-needs-grade",
+      "setup": [],
+      "ops": [
+        {
+          "t": "logs",
+          "op": "upsert",
+          "row": {
+            "id": "l-2",
+            "date": "2026-11-10",
+            "at": "09:00",
+            "type": "review",
+            "label": "复习",
+            "points": 5,
+            "qid": "q-1",
+            "grade": null
+          }
+        }
+      ],
+      "error": "复习记录必须带有自评结果"
+    },
+    {
+      "name": "bad-log-type",
+      "setup": [],
+      "ops": [
+        {
+          "t": "logs",
+          "op": "upsert",
+          "row": {
+            "id": "l-1",
+            "date": "2026-11-10",
+            "at": "08:30",
+            "type": "other",
+            "label": "记录新题",
+            "points": 3,
+            "qid": "q-1"
+          }
+        }
+      ],
+      "error": "type 只能是 add/review/practice/focus"
+    },
+    {
+      "name": "points-out-of-range",
+      "setup": [],
+      "ops": [
+        {
+          "t": "logs",
+          "op": "upsert",
+          "row": {
+            "id": "l-1",
+            "date": "2026-11-10",
+            "at": "08:30",
+            "type": "add",
+            "label": "记录新题",
+            "points": 31,
+            "qid": "q-1"
+          }
+        }
+      ],
+      "error": "points 超出允许范围"
+    },
+    {
+      "name": "minutes-out-of-range",
+      "setup": [],
+      "ops": [
+        {
+          "t": "logs",
+          "op": "upsert",
+          "row": {
+            "id": "l-3",
+            "date": "2026-11-10",
+            "at": "10:00",
+            "type": "focus",
+            "label": "专注",
+            "points": 12.5,
+            "minutes": 1441
+          }
+        }
+      ],
+      "error": "minutes 超出允许范围"
+    },
+    {
+      "name": "timer-remaining-over-duration",
+      "setup": [],
+      "ops": [
+        {
+          "t": "timer",
+          "op": "replace",
+          "row": {
+            "running": true,
+            "remaining": 120,
+            "duration": 60
+          }
+        }
+      ],
+      "error": "剩余时间不能超过总时长"
+    },
+    {
+      "name": "timer-end-out-of-range",
+      "setup": [],
+      "ops": [
+        {
+          "t": "timer",
+          "op": "replace",
+          "row": {
+            "running": true,
+            "remaining": 60,
+            "duration": 60,
+            "end": 4102444800001
+          }
+        }
+      ],
+      "error": "end 超出允许范围"
+    },
+    {
+      "name": "prefs-bad-theme",
+      "setup": [],
+      "ops": [
+        {
+          "t": "prefs",
+          "op": "replace",
+          "row": {
+            "name": "同学",
+            "goal": 7,
+            "minutes": 30,
+            "theme": "dark"
+          }
+        }
+      ],
+      "error": "theme 只能是 light 或 night"
+    },
+    {
+      "name": "prefs-bad-goal",
+      "setup": [],
+      "ops": [
+        {
+          "t": "prefs",
+          "op": "replace",
+          "row": {
+            "name": "同学",
+            "goal": 0,
+            "minutes": 30,
+            "theme": "night"
+          }
+        }
+      ],
+      "error": "goal 必须是 1 到 100 之间的整数"
+    },
+    {
+      "name": "ai-config-bad-provider",
+      "setup": [],
+      "ops": [
+        {
+          "t": "aiConfig",
+          "op": "replace",
+          "row": {
+            "provider": "openai",
+            "base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+            "vision": "qwen3-vl-plus",
+            "text": "qwen-plus",
+            "deepseekBase": "https://api.deepseek.com",
+            "deepseekVision": "deepseek-flash",
+            "deepseekText": "deepseek-flash"
+          }
+        }
+      ],
+      "error": "provider 只能是 qwen 或 deepseek"
+    },
+    {
+      "name": "ai-set-needs-three",
+      "setup": [],
+      "ops": [
+        {
+          "t": "aiSets",
+          "op": "upsert",
+          "row": {
+            "id": "set-1",
+            "created": "2026-11-10",
+            "aiReviewed": true,
+            "sourceId": "q-1",
+            "sourceTitle": "1+1",
+            "subject": "数学",
+            "questions": [
+              {
+                "id": "set-1-q1",
+                "title": "变式一",
+                "answer": "3",
+                "explanation": "因为 1+2",
+                "knowledge": "加法",
+                "note": "",
+                "revealed": false,
+                "grade": ""
+              },
+              {
+                "id": "set-1-q2",
+                "title": "变式二",
+                "answer": "4",
+                "explanation": "因为 2+2",
+                "knowledge": "加法",
+                "note": "注意",
+                "revealed": true,
+                "grade": "good"
+              }
+            ]
+          }
+        }
+      ],
+      "error": "AI 练习组必须恰好包含三道题"
+    },
+    {
+      "name": "ai-set-bad-child",
+      "setup": [],
+      "ops": [
+        {
+          "t": "aiSets",
+          "op": "upsert",
+          "row": {
+            "id": "set-1",
+            "created": "2026-11-10",
+            "aiReviewed": true,
+            "sourceId": "q-1",
+            "sourceTitle": "1+1",
+            "subject": "数学",
+            "questions": [
+              null,
+              {
+                "id": "set-1-q2",
+                "title": "变式二",
+                "answer": "4",
+                "explanation": "因为 2+2",
+                "knowledge": "加法",
+                "note": "注意",
+                "revealed": true,
+                "grade": "good"
+              },
+              {
+                "id": "set-1-q3",
+                "title": "变式三",
+                "answer": "5",
+                "explanation": "因为 2+3",
+                "knowledge": "加法",
+                "note": "",
+                "revealed": false,
+                "grade": "hard"
+              }
+            ]
+          }
+        }
+      ],
+      "error": "练习题格式不正确"
+    },
+    {
+      "name": "unknown-table",
+      "setup": [],
+      "ops": [
+        {
+          "t": "unknown",
+          "op": "upsert"
+        }
+      ],
+      "error": "未知的数据表 unknown"
+    },
+    {
+      "name": "unknown-action",
+      "setup": [],
+      "ops": [
+        {
+          "t": "prefs",
+          "op": "upsert",
+          "row": {
+            "name": "同学",
+            "goal": 7,
+            "minutes": 30,
+            "theme": "night"
+          }
+        }
+      ],
+      "error": "未知的 prefs 操作"
+    },
+    {
+      "name": "rollback-after-valid-op",
+      "setup": [],
+      "ops": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        },
+        {
+          "t": "unknown",
+          "op": "upsert"
+        }
+      ],
+      "error": "未知的数据表 unknown"
+    },
+    {
+      "name": "rollback-overwrite",
+      "setup": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        }
+      ],
+      "ops": [
+        {
+          "t": "questions",
+          "op": "upsert",
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "新标题",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        },
+        {
+          "t": "questions",
+          "op": "upsert",
+          "row": {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 9,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        }
+      ],
+      "error": "stage 必须是 0 到 5 之间的整数"
+    }
+  ]
+}

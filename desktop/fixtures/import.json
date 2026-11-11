@@ -1,0 +1,571 @@
+{
+  "cases": [
+    {
+      "name": "import-basic",
+      "import": {
+        "schema": 1,
+        "questions": [
+          {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          },
+          {
+            "id": "q-2",
+            "subject": "数学",
+            "title": "2+2",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false,
+            "trashed": true
+          }
+        ],
+        "trash": [],
+        "logs": [
+          {
+            "id": "l-1",
+            "date": "2026-11-10",
+            "type": "add",
+            "label": "记录",
+            "points": 3
+          }
+        ],
+        "rewards": [
+          {
+            "id": "r-1",
+            "name": "休息",
+            "cost": 10
+          }
+        ],
+        "redemptions": [
+          {
+            "id": "rd-1",
+            "name": "休息",
+            "cost": 10,
+            "date": "2026-11-10"
+          }
+        ],
+        "prefs": {
+          "name": "小明",
+          "goal": 10,
+          "minutes": 45,
+          "theme": "light"
+        },
+        "timer": {
+          "running": false,
+          "remaining": 45,
+          "duration": 45
+        },
+        "aiSets": [],
+        "aiConfig": {
+          "provider": "qwen",
+          "base": "",
+          "vision": "",
+          "text": "",
+          "deepseekBase": "",
+          "deepseekVision": "",
+          "deepseekText": ""
+        }
+      },
+      "expected": {
+        "schema": 1,
+        "questions": [
+          {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          },
+          {
+            "id": "q-2",
+            "subject": "数学",
+            "title": "2+2",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        ],
+        "trash": [],
+        "logs": [
+          {
+            "id": "l-1",
+            "date": "2026-11-10",
+            "at": "",
+            "type": "add",
+            "label": "记录",
+            "points": 3.0
+          }
+        ],
+        "rewards": [
+          {
+            "id": "r-1",
+            "name": "休息",
+            "cost": 10
+          }
+        ],
+        "redemptions": [
+          {
+            "id": "rd-1",
+            "name": "休息",
+            "cost": 10,
+            "date": "2026-11-10"
+          }
+        ],
+        "prefs": {
+          "name": "小明",
+          "goal": 10,
+          "minutes": 45,
+          "theme": "light"
+        },
+        "timer": {
+          "running": false,
+          "remaining": 45.0,
+          "duration": 45.0
+        },
+        "aiSets": [],
+        "aiConfig": {
+          "provider": "qwen",
+          "base": "",
+          "vision": "",
+          "text": "",
+          "deepseekBase": "",
+          "deepseekVision": "",
+          "deepseekText": ""
+        },
+        "initialized": true
+      }
+    },
+    {
+      "name": "import-with-trash",
+      "import": {
+        "schema": 1,
+        "questions": [
+          {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        ],
+        "trash": [
+          {
+            "id": "q-t",
+            "subject": "数学",
+            "title": "回收站",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        ],
+        "logs": [
+          {
+            "id": "l-1",
+            "date": "2026-11-10",
+            "type": "add",
+            "label": "记录",
+            "points": 3
+          }
+        ],
+        "rewards": [
+          {
+            "id": "r-1",
+            "name": "休息",
+            "cost": 10
+          }
+        ],
+        "redemptions": [
+          {
+            "id": "rd-1",
+            "name": "休息",
+            "cost": 10,
+            "date": "2026-11-10"
+          }
+        ],
+        "prefs": {
+          "name": "小明",
+          "goal": 10,
+          "minutes": 45,
+          "theme": "light"
+        },
+        "timer": {
+          "running": false,
+          "remaining": 45,
+          "duration": 45
+        },
+        "aiSets": [],
+        "aiConfig": {
+          "provider": "qwen",
+          "base": "",
+          "vision": "",
+          "text": "",
+          "deepseekBase": "",
+          "deepseekVision": "",
+          "deepseekText": ""
+        }
+      },
+      "expected": {
+        "schema": 1,
+        "questions": [
+          {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        ],
+        "trash": [
+          {
+            "id": "q-t",
+            "subject": "数学",
+            "title": "回收站",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        ],
+        "logs": [
+          {
+            "id": "l-1",
+            "date": "2026-11-10",
+            "at": "",
+            "type": "add",
+            "label": "记录",
+            "points": 3.0
+          }
+        ],
+        "rewards": [
+          {
+            "id": "r-1",
+            "name": "休息",
+            "cost": 10
+          }
+        ],
+        "redemptions": [
+          {
+            "id": "rd-1",
+            "name": "休息",
+            "cost": 10,
+            "date": "2026-11-10"
+          }
+        ],
+        "prefs": {
+          "name": "小明",
+          "goal": 10,
+          "minutes": 45,
+          "theme": "light"
+        },
+        "timer": {
+          "running": false,
+          "remaining": 45.0,
+          "duration": 45.0
+        },
+        "aiSets": [],
+        "aiConfig": {
+          "provider": "qwen",
+          "base": "",
+          "vision": "",
+          "text": "",
+          "deepseekBase": "",
+          "deepseekVision": "",
+          "deepseekText": ""
+        },
+        "initialized": true
+      }
+    },
+    {
+      "name": "import-incomplete",
+      "import": {
+        "questions": []
+      },
+      "error": "备份格式不正确"
+    },
+    {
+      "name": "import-bad-schema",
+      "import": {
+        "schema": 2,
+        "questions": [
+          {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          },
+          {
+            "id": "q-2",
+            "subject": "数学",
+            "title": "2+2",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 0,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false,
+            "trashed": true
+          }
+        ],
+        "trash": [],
+        "logs": [
+          {
+            "id": "l-1",
+            "date": "2026-11-10",
+            "type": "add",
+            "label": "记录",
+            "points": 3
+          }
+        ],
+        "rewards": [
+          {
+            "id": "r-1",
+            "name": "休息",
+            "cost": 10
+          }
+        ],
+        "redemptions": [
+          {
+            "id": "rd-1",
+            "name": "休息",
+            "cost": 10,
+            "date": "2026-11-10"
+          }
+        ],
+        "prefs": {
+          "name": "小明",
+          "goal": 10,
+          "minutes": 45,
+          "theme": "light"
+        },
+        "timer": {
+          "running": false,
+          "remaining": 45,
+          "duration": 45
+        },
+        "aiSets": [],
+        "aiConfig": {
+          "provider": "qwen",
+          "base": "",
+          "vision": "",
+          "text": "",
+          "deepseekBase": "",
+          "deepseekVision": "",
+          "deepseekText": ""
+        }
+      },
+      "error": "备份格式不正确"
+    },
+    {
+      "name": "import-bad-row",
+      "import": {
+        "schema": 1,
+        "questions": [
+          null
+        ],
+        "trash": [],
+        "logs": [
+          {
+            "id": "l-1",
+            "date": "2026-11-10",
+            "type": "add",
+            "label": "记录",
+            "points": 3
+          }
+        ],
+        "rewards": [
+          {
+            "id": "r-1",
+            "name": "休息",
+            "cost": 10
+          }
+        ],
+        "redemptions": [
+          {
+            "id": "rd-1",
+            "name": "休息",
+            "cost": 10,
+            "date": "2026-11-10"
+          }
+        ],
+        "prefs": {
+          "name": "小明",
+          "goal": 10,
+          "minutes": 45,
+          "theme": "light"
+        },
+        "timer": {
+          "running": false,
+          "remaining": 45,
+          "duration": 45
+        },
+        "aiSets": [],
+        "aiConfig": {
+          "provider": "qwen",
+          "base": "",
+          "vision": "",
+          "text": "",
+          "deepseekBase": "",
+          "deepseekVision": "",
+          "deepseekText": ""
+        }
+      },
+      "error": "questions 备份数据格式不正确"
+    },
+    {
+      "name": "import-bad-question",
+      "import": {
+        "schema": 1,
+        "questions": [
+          {
+            "id": "q-1",
+            "subject": "数学",
+            "title": "1+1",
+            "answer": "2",
+            "reason": "",
+            "tag": "",
+            "cause": "概念不清",
+            "difficulty": "基础",
+            "image": "",
+            "favorite": false,
+            "stage": 9,
+            "due": "2026-11-10",
+            "created": "2026-11-10",
+            "demo": false
+          }
+        ],
+        "trash": [],
+        "logs": [
+          {
+            "id": "l-1",
+            "date": "2026-11-10",
+            "type": "add",
+            "label": "记录",
+            "points": 3
+          }
+        ],
+        "rewards": [
+          {
+            "id": "r-1",
+            "name": "休息",
+            "cost": 10
+          }
+        ],
+        "redemptions": [
+          {
+            "id": "rd-1",
+            "name": "休息",
+            "cost": 10,
+            "date": "2026-11-10"
+          }
+        ],
+        "prefs": {
+          "name": "小明",
+          "goal": 10,
+          "minutes": 45,
+          "theme": "light"
+        },
+        "timer": {
+          "running": false,
+          "remaining": 45,
+          "duration": 45
+        },
+        "aiSets": [],
+        "aiConfig": {
+          "provider": "qwen",
+          "base": "",
+          "vision": "",
+          "text": "",
+          "deepseekBase": "",
+          "deepseekVision": "",
+          "deepseekText": ""
+        }
+      },
+      "error": "stage 必须是 0 到 5 之间的整数"
+    }
+  ]
+}
