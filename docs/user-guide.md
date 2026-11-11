@@ -12,14 +12,14 @@ loopback service to save your data — there is no browser tab to manage and not
 install beyond the WebView2 runtime (bundled with Windows 11). Keep the window open while
 you use it. See `desktop/使用说明.txt` for the full Windows instructions.
 
-Study data is stored in the local SQLite database, not in the browser. Opening
+Study data is stored in the local SQLite database, not in the page. Opening
 `src/app/index.html` directly is a read-only preview: it shows the sample questions, but
 changes are not saved.
 
 Photo / PDF recognition and the "variation practice" (举一反三) feature additionally need a
 network connection and a Qwen or DeepSeek API key; see [ai-guide.md](ai-guide.md). The key is
 entered once in the AI settings and then kept by the local service in encrypted form, so a
-reload keeps it and the browser never sees it again.
+reload keeps it and the page never sees it again.
 
 ## First run
 
@@ -50,19 +50,20 @@ reload keeps it and the browser never sees it again.
 
 ## Saving and moving your data
 
-- Data lives in the local service's SQLite database (`~/.local/share/shiguang-study/study.db`
-  by default). It is never written back into the HTML file.
+- Data lives in the local service's SQLite database in the data directory
+  (`%USERPROFILE%\.local\share\shiguang-study\study.db` on Windows). It is never written
+  back into the HTML file.
 - Before moving to another machine or making major changes, export a JSON backup from
   「偏好与数据」. Import it to restore everything.
 - The JSON backup contains wrong-answer images, review logs, rewards, redemption records,
   preferences and the AI provider settings. It never contains API keys: the encrypted key
-  stays in the local database and the `.env` file. The CSV export is convenient
-  for spreadsheets but contains no images.
+  stays in the local database and the `.env` file in that same directory. The CSV export is
+  convenient for spreadsheets but contains no images.
 - Images are compressed automatically before they are stored.
 - Restoring a backup that contains a running timer leaves the timer paused, so old time is
   never counted again.
 - Printing opens a separate preview page. Click 「打印 / 保存 PDF」 (*Print / Save as PDF*)
-  there to open the browser's print dialog.
+  there to open the print dialog and pick a printer or save it as PDF.
 - Clearing the sample questions (「清空数据」) keeps the stored API keys; they are service
   credentials, not study data. Remove them in the AI settings with 「清除当前服务商密钥」.
 

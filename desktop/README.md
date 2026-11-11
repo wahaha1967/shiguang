@@ -17,8 +17,12 @@ most Windows 10 machines already have it).
 
 To **build**:
 
-- Go 1.26+, with `CGO_ENABLED=0`
-- Wails v3.1.0 CLI (`wails3`) on `PATH`
+- Go 1.26+, with `CGO_ENABLED=0`. A local Go older than 1.26 is fine: `go.mod` declares
+  `go 1.26.0` and `GOTOOLCHAIN=auto` selects the required toolchain automatically inside
+  this directory.
+- Wails v3.1.0 CLI (`wails3`) on `PATH`, installed once with
+  `go install github.com/wailsapp/wails/v3/cmd/wails3@v3.1.0`. The binary lands in
+  `$(go env GOPATH)\bin`, which must be on `PATH`.
 
 ## Build and test
 

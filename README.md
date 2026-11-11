@@ -19,6 +19,7 @@ Identifiers, code comments, and repository documentation are in English.
 │   ├── cmd/study/          entry point and command-line flags
 │   ├── internal/           app, config, server, store, ops, secret, llm packages
 │   ├── fixtures/           golden JSON replayed by the Go tests (frozen sample data)
+│   ├── build/windows/      icon, manifest, and version resources for the .syso
 │   ├── docs/parity.md      intentional behaviour differences from the original backend
 │   ├── Taskfile.yml        build / test / package tasks
 │   └── 使用说明.txt         end-user Windows instructions
@@ -46,8 +47,12 @@ wails3 task package           # dist/拾光自习室/… plus a windows-x64 zip
 wails3 task serve             # loopback HTTP only, for debugging (127.0.0.1:4312)
 ```
 
-Building needs Go 1.26+ with `CGO_ENABLED=0` and the Wails v3.1.0 CLI (`wails3`). Running the
-built app needs Windows 10/11 x64 and the WebView2 runtime (bundled with Windows 11).
+Building needs Go 1.26+ with `CGO_ENABLED=0` and the Wails v3.1.0 CLI (`wails3`). A local Go
+older than 1.26 still works: `GOTOOLCHAIN=auto` picks the required toolchain automatically
+inside `desktop/`. Install the CLI once with
+`go install github.com/wailsapp/wails/v3/cmd/wails3@v3.1.0`; it lands in `$(go env GOPATH)\bin`,
+which must be on `PATH`. Running the built app needs Windows 10/11 x64 and the WebView2 runtime
+(bundled with Windows 11).
 
 ## How it works
 

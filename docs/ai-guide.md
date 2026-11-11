@@ -10,7 +10,7 @@ Updated: 2026-11-11.
 On Windows, double-click `拾光自习室.exe`; it opens its own window and runs a local loopback
 service that saves your study data. Keep the window open while you use the app.
 
-1. Study data is stored in the local SQLite database, not in the browser.
+1. Study data is stored in the local SQLite database, not in the page.
 2. The AI features need that local service: the page never talks to the provider itself.
 3. The provider key is encrypted by the service and stored in the local database.
 
@@ -51,18 +51,18 @@ and the independent review step.
 
 **Keys**
 
-- The key lives in the local service, not in the browser. The page sends it once, the
+- The key lives in the local service, not in the page. The page sends it once, the
   service encrypts it with the secret from `.env` and stores the ciphertext in SQLite. The
-  browser never receives a key back — only the fact that one is configured.
+  page never receives a key back — only the fact that one is configured.
 - The panel shows a masked hint of the stored key **in the input field itself**, for example
   `sk-a****0XYZ`: the first and the last four characters only, the rest is `****`. A key of
   twelve characters or less is masked completely. The hint is produced by the service at
   runtime; no key ever appears in the HTML file, in the source or in a backup.
 - Clicking the field selects the hint, so typing replaces it. Saving without touching the
   field keeps the stored key unchanged.
-- The encryption secret is `SHIGUANG_SECRET` in the `.env` file next to the project. It is
-  generated automatically on first use and the file is written with owner-only permissions.
-  **Keep that file: without it the stored keys cannot be decrypted.**
+- The encryption secret is `SHIGUANG_SECRET` in the `.env` file in the data directory
+  (`%USERPROFILE%\.local\share\shiguang-study\.env`). It is generated automatically on first
+  use. **Keep that file: without it the stored keys cannot be decrypted.**
 - Keys are not part of the study backup. A backup moved to another machine carries no key;
   paste the key again there.
 - Get a Qwen key: <https://help.aliyun.com/zh/model-studio/get-api-key>
@@ -86,7 +86,7 @@ buttons says so until you save.
 
 Open 「拍照录题」 (*Capture*) and take a photo, or upload JPG / PNG / WebP files.
 
-- On a phone the system camera opens; on desktop the browser asks for camera permission and
+- On a phone the system camera opens; on desktop the app asks for camera permission and
   releases the camera immediately after the shot. If no camera is available, upload an
   existing photo instead.
 - Limit: 12 MB per photo, 12 images per batch. Images are compressed locally and only
@@ -150,13 +150,13 @@ Cancelling stops the wait, but a request already sent to the provider may still 
 
 ## 6. Test scope and references
 
-The program has been exercised with browser feature tests and local proxy interface tests.
-Protocol, error handling, proofreading, saving and the practice flow were verified with
-simulated model responses.
+The Go test suite covers the protocol, error handling, key storage and the practice flow with
+simulated model responses, and replays golden fixtures captured from the original Python
+release.
 
-The key handling was verified on 2026-11-11: the browser sends the key once to the local
+The key handling was verified on 2026-11-11: the page sends the key once to the local
 service, the service stores only the ciphertext in SQLite (the plain key is not in the
-database file), the service decrypts it again for each request, and the browser can no
+database file), the service decrypts it again for each request, and the page can no
 longer inject a key per request. A reload keeps the key.
 
 On 2026-10-22 the real Qwen service was exercised with a user-supplied key: text and vision
