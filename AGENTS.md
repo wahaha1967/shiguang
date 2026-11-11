@@ -66,4 +66,4 @@ wails3 task serve           # 仅本机 HTTP（127.0.0.1:4312），调试用
 - **复习/积分数值勿改错，硬性上限勿放宽**（见 `docs/user-guide.md`）。
 - **只绑 `127.0.0.1` + Host 白名单**，无公网账号体系，不要暴露到公网。
 - **桌面依赖只经 Go modules**（`desktop/go.mod`，`CGO_ENABLED=0`）；前端禁引入框架 / 构建工具 / npm。
-- 界面文案、错误提示、应用内注释保持中文，标识符与仓库文档用英文；**用户可见行为变更 → 同步更新 `docs/user-guide.md` / `docs/ai-guide.md`**（Windows 使用相关同步 `desktop/使用说明.txt`）。
+- 界面文案、错误提示、应用内注释保持中文；**用户可见行为变更 → 同步更新 `docs/user-guide.md` / `docs/ai-guide.md`**（Windows 使用相关同步 `desktop/使用说明.txt`）。
