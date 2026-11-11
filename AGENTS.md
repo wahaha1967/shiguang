@@ -11,7 +11,7 @@
 | 任务 | 先读 |
 |---|---|
 | 改前端（界面 / 核心逻辑 / AI 逻辑 / 内置 PDF.js） | `src/app/index.html`（唯一真源），改完同步到 `desktop/web/index.html` 并更新哈希锁（见红线） |
-| 改桌面后端（HTTP / 密钥 / 数据结构 / 生命周期） | `desktop/README.md` + `desktop/internal/`（server / ops / store / secret / llm / config / app） |
+| 改桌面后端（HTTP / 密钥 / 数据结构 / 生命周期） | `README.md` + `desktop/internal/`（server / ops / store / secret / llm / config / app） |
 | 与旧后端的行为差异、桌面版加固项 | `desktop/docs/parity.md` |
 | AI 行为、服务商转发、白名单 | `desktop/internal/llm/llm.go` + `docs/ai-guide.md` |
 | 复习/积分数值、硬性上限 | `docs/user-guide.md` + 前端 `index.html` |
@@ -22,6 +22,7 @@
 
 | 路径 | 作用 |
 |---|---|
+| `README.md` / `README_zh.md` | 仓库门面：定位、结构、构建、安全与许可（英文基准 + 中文对照，两版章节一一对应） |
 | `src/app/index.html` | **前端本体（约 7.5 MB）**，UI 的唯一真源：界面 + 核心逻辑 + AI 逻辑 + 内置 PDF.js |
 | `desktop/web/index.html` | 上者的逐字节副本，被 Go 二进制内嵌；由 `desktop/web/embed_test.go` 哈希锁定 |
 | `desktop/cmd/study/` | 入口与命令行参数（`--serve` / `--port` / `--open`） |
@@ -52,7 +53,7 @@ wails3 task serve           # 仅本机 HTTP（127.0.0.1:4312），调试用
 ```
 
 构建需 Go 1.26+（`CGO_ENABLED=0`）与 Wails v3.1.0 CLI；运行需 Windows 10/11 x64 + WebView2。
-环境准备（Go 工具链自动切换、`wails3` 安装与 PATH）见 `desktop/README.md` 的 Requirements。
+环境准备（Go 工具链自动切换、`wails3` 安装与 PATH）见根 `README.md` 的 Requirements。
 双击 `src/app/index.html`（`file://`）是只读预览：能看不能存。
 
 ## 红线（违反即缺陷）
