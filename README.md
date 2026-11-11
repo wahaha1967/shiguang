@@ -59,9 +59,9 @@ needs Windows 10/11 x64 and the WebView2 runtime (bundled with Windows 11).
   dependency at runtime.
 - **SQLite is the only database.** The Go service stores learning data and the non-secret AI
   settings (provider, models, endpoints) in SQLite at
-  `~/.local/share/shiguang-study/study.db`. The page keeps no learning data. Every write goes
-  through `commit()`, which validates the whole state before sending the changed rows to
-  `/api/ops`; a failed sync is reported and retried on the next action.
+  `%USERPROFILE%\.local\share\shiguang-study\study.db`. The page keeps no learning data.
+  Every write goes through `commit()`, which validates the whole state before sending the
+  changed rows to `/api/ops`; a failed sync is reported and retried on the next action.
 - **The provider key stays in the backend.** The page sends the key once to `POST /api/ai-key`;
   the service encrypts it with `SHIGUANG_SECRET` (AES-256-GCM) and stores only the ciphertext
   in SQLite. `/api/status` reports whether a key is configured, never its value, and the key is

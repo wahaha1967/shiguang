@@ -1,9 +1,7 @@
 # Shiguang Study Room · Windows Desktop
 
-A single-file Windows desktop build of 拾光自习室. The UI is the unchanged
-`web/index.html` from the Python release; the whole backend is rewritten in Go
-and embedded into one `.exe`. No Python, uv, venv, or Node runtime is needed to
-run it.
+Developer notes for the shippable Windows app. For the product overview and the
+repository layout, see the [root README](../README.md).
 
 - Platform: Windows 10/11 x64
 - GUI: Wails v3.1.0 + Microsoft Edge WebView2
