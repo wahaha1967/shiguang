@@ -7,18 +7,17 @@ it directly with a fake upstream.
 The module owns two responsibilities:
   * decide which provider an endpoint belongs to (endpoint allowlist)
   * forward a chat completion request without ever leaking the API key
+
+The key itself is not read here: the backend decrypts the stored key and
+hands it over for the single request.
 """
 import json
-import os
 import urllib.error
 import urllib.parse
 import urllib.request
 
 MAX_REQUEST = 25 * 1024 * 1024
 MAX_RESPONSE = 3 * 1024 * 1024
-
-# Environment variables that may hold a provider key on the server side.
-KEY_ENV = {'qwen': 'DASHSCOPE_API_KEY', 'deepseek': 'DEEPSEEK_API_KEY'}
 
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -55,11 +54,6 @@ def endpoint_url(value):
     return value.rstrip('/') + '/chat/completions'
 
 
-def server_key(provider):
-    """The provider key configured in the server environment, if any."""
-    return os.environ.get(KEY_ENV.get(provider, ''), '')
-
-
 def upstream(endpoint, key, body):
     """Forward one chat completion request.
 
@@ -69,7 +63,7 @@ def upstream(endpoint, key, body):
     """
     url = endpoint_url(endpoint)
     if not isinstance(key, str) or not key.strip() or len(key) > 500 or '\n' in key or '\r' in key:
-        raise ValueError('请在页面填写所选服务商的 API Key，或配置对应的环境变量')
+        raise ValueError('服务商密钥无效，请重新保存 API Key')
     if not isinstance(body, dict) or not isinstance(body.get('messages'), list) or not isinstance(body.get('model'), str):
         raise ValueError('请求缺少模型或消息')
     provider = endpoint_provider(endpoint)

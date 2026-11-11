@@ -21,14 +21,10 @@ DEFAULT_PORT = 4312
 
 @lru_cache(maxsize=1)
 def app_path() -> Path:
-    """Locate the single-file app.
+    """Locate the single-file app in the source tree.
 
-    Three layouts have to work:
-      * the built bundle   -> ``study-room.html`` next to the package
-      * the source tree    -> ``src/app/index.html`` above the package
-      * an installed venv  -> either of the above, found by walking up
-
-    ``SHIGUANG_APP`` overrides the search with an explicit path.
+    ``SHIGUANG_APP`` overrides the search with an explicit path; otherwise walk up
+    from the package to find ``src/app/index.html``.
     """
     override = os.environ.get('SHIGUANG_APP')
     if override:
@@ -36,15 +32,11 @@ def app_path() -> Path:
         if candidate.is_file():
             return candidate
     here = Path(__file__).resolve().parent
-    for candidate in (here / 'study-room.html', here / 'index.html'):
+    for base in list(here.parents)[:6]:
+        candidate = base / 'src' / 'app' / 'index.html'
         if candidate.is_file():
             return candidate
-    for base in list(here.parents)[:6]:
-        for candidate in (base / 'src' / 'app' / 'index.html',
-                          base / 'dist' / 'study-room.html'):
-            if candidate.is_file():
-                return candidate
-    return here / 'study-room.html'
+    return here / 'index.html'
 
 
 @lru_cache(maxsize=1)

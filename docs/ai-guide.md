@@ -1,29 +1,23 @@
 # Shiguang Study Room · Photo / PDF capture and variation practice
 
-Updated: 2026-10-22.
+Updated: 2026-11-11.
 
 > The application interface is in Chinese. Chinese labels are quoted as 「…」 so you can
 > find the matching control.
 
 ## 1. How to open it
 
-Ordinary wrong-answer organisation, review and timing still work by double-clicking
-`study-room.html` — fully offline.
+Start the FastAPI service so study data can be saved:
 
-For the AI features (recommended):
+1. From the source tree: `uv run shiguang-study`.
+2. The browser opens <http://127.0.0.1:4312/>. Keep the service window open.
+3. Study data is stored in the local SQLite database, not in the browser.
 
-1. Keep the HTML file and the launcher scripts in the same folder.
-2. macOS: double-click `launch.command`. Windows: double-click `launch.bat`.
-3. The browser opens <http://127.0.0.1:4312/>. Keep the launcher window open.
-4. If Python 3 is not installed, get it from python.org first. The service uses only the
-   standard library, so there is nothing to `pip install`.
-5. From the same directory you can also run `python3 bridge.py`.
+The AI features need that service: the browser never talks to the provider itself. The
+provider key is encrypted by the service and stored in the local database.
 
-Existing study data is not deleted by the upgrade. Note however that the double-clicked page
-and the local service use **different browser storage areas**. Before switching to the local
-service for the first time, export a full backup from the old page, then import it under
-「偏好与数据」 in the local service. Afterwards, stick to one browser and one
-`http://127.0.0.1:4312/` URL, and export backups regularly.
+For the AI features, configure the provider below in 「偏好与数据」 or the AI settings on the
+「拍照录题」 / 「举一反三」 pages.
 
 ## 2. Choose and configure the AI provider (Qwen by default)
 
@@ -42,8 +36,9 @@ and the independent review step.
 - Vision model for photos and PDFs: `qwen3-vl-plus`
 - Text model for variant generation: `qwen-plus`. When the source question has an image, the
   vision model is used to read it before questions are generated.
-- Paste an Alibaba Cloud Bailian API key from the same region as the endpoint, choose the
-  「本地服务」 (*local service*) call mode, and save the settings.
+- Paste an Alibaba Cloud Bailian API key from the same region as the endpoint and press
+  「保存设置」 (*Save settings*). The key is sent to the local service, encrypted and stored
+  in the local database.
 - 「测试连接」 (*Test connection*) sends one tiny text request and one vision request, so you
   can confirm both models work.
 
@@ -58,21 +53,36 @@ and the independent review step.
 
 **Keys**
 
-- Keys stay in the page's memory only. They are never written into the HTML file, the study
-  backup, or any permanent browser storage. Closing or reloading the page clears them.
-- You may instead export `DASHSCOPE_API_KEY` / `DEEPSEEK_API_KEY` before starting the local
-  service. The page then needs no key, and the service never returns environment keys to the
-  browser.
+- The key lives in the local service, not in the browser. The page sends it once, the
+  service encrypts it with the secret from `.env` and stores the ciphertext in SQLite. The
+  browser never receives a key back — only the fact that one is configured.
+- The panel shows a masked hint of the stored key **in the input field itself**, for example
+  `sk-a****0XYZ`: the first and the last four characters only, the rest is `****`. A key of
+  twelve characters or less is masked completely. The hint is produced by the service at
+  runtime; no key ever appears in the HTML file, in the source or in a backup.
+- Clicking the field selects the hint, so typing replaces it. Saving without touching the
+  field keeps the stored key unchanged.
+- The encryption secret is `SHIGUANG_SECRET` in the `.env` file next to the project. It is
+  generated automatically on first use and the file is written with owner-only permissions.
+  **Keep that file: without it the stored keys cannot be decrypted.**
+- Keys are not part of the study backup. A backup moved to another machine carries no key;
+  paste the key again there.
 - Get a Qwen key: <https://help.aliyun.com/zh/model-studio/get-api-key>
 - Get a DeepSeek key: <https://platform.deepseek.com/api_keys>
-- 「清除当前服务商密钥」 (*Clear the current provider's key*) only clears the selected
-  provider's in-page key. It does not touch the other provider and does not delete the
-  server-side environment variable.
-- A reload keeps the selected provider and the model settings, but clears both in-page keys.
-  Defaults only apply on first use; an already chosen provider is remembered.
+- 「清除当前服务商密钥」 (*Clear the current provider's key*) deletes the stored key of the
+  selected provider. It does not touch the other provider.
+- A reload keeps the selected provider, the model settings and the stored keys. The input
+  field itself is always empty after a save — the key never lingers in the page.
 - A failed call never silently switches to the other provider. Check the error message and
   the permissions, key and balance of the account you selected.
 - Billing follows the console of the provider you selected.
+
+**Which provider is used**
+
+The panel shows the current provider twice: in the heading 「AI 连接设置 · 通义千问」 and in
+the highlighted row 「当前服务商」. Changing the dropdown switches that row immediately, but
+the choice only takes effect after 「保存设置」 (*Save settings*) — the status line under the
+buttons says so until you save.
 
 ## 3. Photos and image capture
 
@@ -128,8 +138,8 @@ Upload a PDF of at most 30 MB and 200 pages, enter page numbers such as `1-3,5`,
    which they follow the normal review schedule.
 
 Practice is self-assessed, not auto-graded. AI questions and answers still need checking.
-Practice sets, answers, the reveal state and self-ratings are stored locally and included in
-the full JSON backup; the 30 most recent sets are kept.
+Practice sets, answers, the reveal state and self-ratings are stored in the local SQLite
+database and included in the full JSON backup; the 30 most recent sets are kept.
 
 Generating and self-assessing award no points. A question added to the library earns the usual
 +3 for a new question; adding it twice is blocked.
@@ -145,6 +155,11 @@ Cancelling stops the wait, but a request already sent to the provider may still 
 The program has been exercised with browser feature tests and local proxy interface tests.
 Protocol, error handling, proofreading, saving and the practice flow were verified with
 simulated model responses.
+
+The key handling was verified on 2026-11-11: the browser sends the key once to the local
+service, the service stores only the ciphertext in SQLite (the plain key is not in the
+database file), the service decrypts it again for each request, and the browser can no
+longer inject a key per request. A reload keeps the key.
 
 On 2026-10-22 the real Qwen service was exercised with a user-supplied key: text and vision
 connectivity, photo recognition, two-page PDF recognition, generation of three same-type

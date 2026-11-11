@@ -9,16 +9,28 @@ The schema mirrors the app's state object:
     prefs       one row per owner
     timers      one row per owner
     ai_sets     generated practice sets and their questions
+    ai_keys     provider API keys, encrypted with the secret from .env
 
 Every table carries ``owner_id``, so two different access tokens can never see
 each other's data.
 """
 from __future__ import annotations
 
+import sqlite3
 from collections.abc import Iterator
 from pathlib import Path
 
-from sqlalchemy import Boolean, Float, ForeignKey, Integer, String, Text, create_engine, event
+from sqlalchemy import (
+    Boolean,
+    Float,
+    ForeignKey,
+    Integer,
+    String,
+    Text,
+    create_engine,
+    event,
+    text,
+)
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, sessionmaker
 
 from . import config
@@ -107,6 +119,34 @@ class Timer(Base):
     end: Mapped[float | None] = mapped_column(Float, nullable=True)
 
 
+class AiConfig(Base):
+    __tablename__ = 'ai_config'
+
+    owner_id: Mapped[str] = mapped_column(String(32), primary_key=True)
+    provider: Mapped[str] = mapped_column(String(20), default='qwen')
+    base: Mapped[str] = mapped_column(Text, default='')
+    vision: Mapped[str] = mapped_column(String(120), default='')
+    text: Mapped[str] = mapped_column(String(120), default='')
+    deepseek_base: Mapped[str] = mapped_column(Text, default='')
+    deepseek_vision: Mapped[str] = mapped_column(String(120), default='')
+    deepseek_text: Mapped[str] = mapped_column(String(120), default='')
+
+
+class AiKey(Base):
+    """Provider API keys, encrypted with the secret from ``.env``.
+
+    The ciphertext never leaves the database: the backend decrypts it for
+    every request and the browser only learns whether a key exists.
+    """
+
+    __tablename__ = 'ai_keys'
+
+    owner_id: Mapped[str] = mapped_column(String(32), primary_key=True)
+    provider: Mapped[str] = mapped_column(String(20), primary_key=True)
+    ciphertext: Mapped[str] = mapped_column(Text, default='')
+    updated: Mapped[str] = mapped_column(String(20), default='')
+
+
 class AiSet(Base):
     __tablename__ = 'ai_sets'
 
@@ -138,6 +178,41 @@ class AiSetQuestion(Base):
 _engine = None
 _Session = None
 
+# SQLite before 3.35 cannot drop a column, so the table is rebuilt instead.
+REBUILD_AI_CONFIG = """
+CREATE TABLE ai_config_new (
+    owner_id VARCHAR(32) NOT NULL,
+    provider VARCHAR(20),
+    base TEXT,
+    vision VARCHAR(120),
+    text VARCHAR(120),
+    deepseek_base TEXT,
+    deepseek_vision VARCHAR(120),
+    deepseek_text VARCHAR(120),
+    PRIMARY KEY (owner_id)
+);
+INSERT INTO ai_config_new (owner_id, provider, base, vision, text, deepseek_base,
+                            deepseek_vision, deepseek_text)
+    SELECT owner_id, provider, base, vision, text, deepseek_base,
+           deepseek_vision, deepseek_text FROM ai_config;
+DROP TABLE ai_config;
+ALTER TABLE ai_config_new RENAME TO ai_config
+"""
+
+
+def _migrate(engine) -> None:
+    """Remove the retired ``ai_config.transport`` column from older databases."""
+    with engine.begin() as conn:
+        rows = conn.execute(text('PRAGMA table_info(ai_config)')).fetchall()
+        if 'transport' not in {row[1] for row in rows}:
+            return
+        if sqlite3.sqlite_version_info >= (3, 35, 0):
+            conn.execute(text('ALTER TABLE ai_config DROP COLUMN transport'))
+            return
+        for statement in REBUILD_AI_CONFIG.split(';'):
+            if statement.strip():
+                conn.execute(text(statement))
+
 
 def _make_engine(url: str):
     engine = create_engine(url, future=True, connect_args={'check_same_thread': False})
@@ -160,6 +235,7 @@ def engine():
         path.parent.mkdir(parents=True, exist_ok=True)
         _engine = _make_engine(f'sqlite:///{path}')
         Base.metadata.create_all(_engine)
+        _migrate(_engine)
         _Session = sessionmaker(bind=_engine, expire_on_commit=False, future=True)
     return _engine
 

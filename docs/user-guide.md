@@ -1,21 +1,32 @@
 # Shiguang Study Room · User Guide
 
-A local, offline-first workbench for turning wrong answers into mastered skills.
+A local workbench for turning wrong answers into mastered skills.
 
 > The application interface is in Chinese. Chinese labels are quoted below as 「…」 so you
 > can find the matching control.
 
 ## How to open it
 
-Double-click `study-room.html` (or `src/app/index.html` in the source tree) and open it in
-any desktop browser.
+Start the FastAPI service, then open <http://127.0.0.1:4312/> in any desktop browser:
 
-Organising, reviewing and timing your work need no login and no internet connection — the
-HTML file contains the whole interface, its scripts and the PDF parsing resources.
+```bash
+uv run shiguang-study
+```
 
-Photo / PDF recognition and the "variation practice" (举一反三) feature do need a network
-connection and a Qwen or DeepSeek API key. For those, use the bundled launcher:
-`launch.command` on macOS, `launch.bat` on Windows. See [ai-guide.md](ai-guide.md).
+Add `--open` to have the service open the browser for you once it is ready:
+
+```bash
+uv run shiguang-study --open
+```
+
+Study data is stored in the local SQLite database, not in the browser. Opening
+`src/app/index.html` directly is a read-only preview: it shows the sample questions, but
+changes are not saved.
+
+Photo / PDF recognition and the "variation practice" (举一反三) feature additionally need a
+network connection and a Qwen or DeepSeek API key; see [ai-guide.md](ai-guide.md). The key is
+entered once in the AI settings and then kept by the local service in encrypted form, so a
+reload keeps it and the browser never sees it again.
 
 ## First run
 
@@ -46,24 +57,25 @@ connection and a Qwen or DeepSeek API key. For those, use the bundled launcher:
 
 ## Saving and moving your data
 
-- Data lives in the local storage of the browser you used. It is never written back into
-  the HTML file.
-- Before switching browsers, moving the file, or clearing browser data, export a JSON
-  backup first. Open the new location and import it to restore everything.
-- The JSON backup contains wrong-answer images, review logs, rewards, redemption records
-  and preferences. The CSV export is convenient for spreadsheets but contains no images.
-- Images are compressed automatically. Browser storage is limited, so when it runs out the
-  app tells you and keeps the data as it was before the failed save.
+- Data lives in the local service's SQLite database (`~/.local/share/shiguang-study/study.db`
+  by default). It is never written back into the HTML file.
+- Before moving to another machine or making major changes, export a JSON backup from
+  「偏好与数据」. Import it to restore everything.
+- The JSON backup contains wrong-answer images, review logs, rewards, redemption records,
+  preferences and the AI provider settings. It never contains API keys: the encrypted key
+  stays in the local database and the `.env` file. The CSV export is convenient
+  for spreadsheets but contains no images.
+- Images are compressed automatically before they are stored.
 - Restoring a backup that contains a running timer leaves the timer paused, so old time is
   never counted again.
 - Printing opens a separate preview page. Click 「打印 / 保存 PDF」 (*Print / Save as PDF*)
   there to open the browser's print dialog.
+- Clearing the sample questions (「清空数据」) keeps the stored API keys; they are service
+  credentials, not study data. Remove them in the AI settings with 「清除当前服务商密钥」.
 
 ## File independence
 
-Offline features need nothing but the HTML file. The recommended way to call the AI models
-additionally needs the local Python service and the launch scripts in the same folder (the
-service uses only the Python standard library, no `pip install` required).
+The app needs the local service to save data. The HTML is still a single file, but on its
+own it is a read-only preview. The FastAPI backend is managed by uv.
 
-Read [ai-guide.md](ai-guide.md) before using the AI features, especially for the data
-migration step between the double-clicked page and the local service.
+Read [ai-guide.md](ai-guide.md) before using the AI features.

@@ -21,12 +21,24 @@ not trusted.
 from __future__ import annotations
 
 import re
+from datetime import datetime, timezone
 from typing import Any
 
 from sqlalchemy import delete, select
 from sqlalchemy.orm import Session
 
-from .db import (AiSet, AiSetQuestion, Log, Prefs, Question, Redemption, Reward, Timer)
+from .db import (
+    AiConfig,
+    AiKey,
+    AiSet,
+    AiSetQuestion,
+    Log,
+    Prefs,
+    Question,
+    Redemption,
+    Reward,
+    Timer,
+)
 
 ID_RE = re.compile(r'^[A-Za-z0-9_-]{1,100}$')
 DATE_RE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
@@ -96,6 +108,7 @@ def read_state(session: Session, owner: str) -> dict:
 
     prefs = session.get(Prefs, owner)
     timer = session.get(Timer, owner)
+    ai_cfg = session.get(AiConfig, owner)
 
     state: dict[str, Any] = {
         'schema': 1,
@@ -157,6 +170,16 @@ def read_state(session: Session, owner: str) -> dict:
         if timer.end is not None:
             item['end'] = timer.end
         state['timer'] = item
+    if ai_cfg is not None:
+        state['aiConfig'] = {
+            'provider': ai_cfg.provider,
+            'base': ai_cfg.base,
+            'vision': ai_cfg.vision,
+            'text': ai_cfg.text,
+            'deepseekBase': ai_cfg.deepseek_base,
+            'deepseekVision': ai_cfg.deepseek_vision,
+            'deepseekText': ai_cfg.deepseek_text,
+        }
 
     for row in sets:
         items = session.scalars(
@@ -180,6 +203,8 @@ def read_state(session: Session, owner: str) -> dict:
                 'grade': q.grade,
             } for q in items],
         })
+    state['initialized'] = (prefs is not None or ai_cfg is not None
+                            or bool(questions or logs or rewards or redemptions or sets or timer))
     return state
 
 
@@ -328,7 +353,8 @@ def _replace_timer(session: Session, owner: str, op: dict) -> None:
     remaining = _number(row.get('remaining', 0), 'remaining', 0, 24 * 3600)
     end = row.get('end')
     if end is not None:
-        end = _number(end, 'end', 0, 24 * 3600)
+        # The browser sends an absolute epoch timestamp in milliseconds.
+        end = _number(end, 'end', 0, 4_102_444_800_000)
     if remaining > duration:
         raise InvalidOperation('剩余时间不能超过总时长')
     if timer is None:
@@ -340,8 +366,73 @@ def _replace_timer(session: Session, owner: str, op: dict) -> None:
     timer.end = end
 
 
+def _replace_ai_config(session: Session, owner: str, op: dict) -> None:
+    row = op.get('row')
+    if row is None:
+        cfg = session.get(AiConfig, owner)
+        if cfg is not None:
+            session.delete(cfg)
+        return
+    if not isinstance(row, dict):
+        raise InvalidOperation('AI 配置格式不正确')
+    provider = _text(row.get('provider', 'qwen'), 'provider', 20)
+    if provider not in ('qwen', 'deepseek'):
+        raise InvalidOperation('provider 只能是 qwen 或 deepseek')
+    values = {
+        'provider': provider,
+        'base': _text(row.get('base', ''), 'base', 500),
+        'vision': _text(row.get('vision', ''), 'vision', 120),
+        'text': _text(row.get('text', ''), 'text', 120),
+        'deepseek_base': _text(row.get('deepseekBase', ''), 'deepseekBase', 500),
+        'deepseek_vision': _text(row.get('deepseekVision', ''), 'deepseekVision', 120),
+        'deepseek_text': _text(row.get('deepseekText', ''), 'deepseekText', 120),
+    }
+    cfg = session.get(AiConfig, owner)
+    if cfg is None:
+        cfg = AiConfig(owner_id=owner)
+        session.add(cfg)
+    for field, value in values.items():
+        setattr(cfg, field, value)
+
+
+def set_key(session: Session, owner: str, provider: str, ciphertext: str) -> None:
+    """Store one encrypted provider key."""
+    row = session.get(AiKey, (owner, provider))
+    if row is None:
+        row = AiKey(owner_id=owner, provider=provider)
+        session.add(row)
+    row.ciphertext = ciphertext
+    row.updated = datetime.now(timezone.utc).isoformat(timespec='seconds')
+
+
+def read_key(session: Session, owner: str, provider: str) -> str:
+    """The encrypted key of one provider, or an empty string."""
+    row = session.get(AiKey, (owner, provider))
+    return row.ciphertext if row is not None else ''
+
+
+def delete_key(session: Session, owner: str, provider: str) -> bool:
+    """Remove one provider key. Returns whether a key was there."""
+    row = session.get(AiKey, (owner, provider))
+    if row is None:
+        return False
+    session.delete(row)
+    return True
+
+
+def read_keys(session: Session, owner: str) -> dict[str, str]:
+    """The encrypted keys of one owner, keyed by provider."""
+    rows = session.scalars(select(AiKey).where(AiKey.owner_id == owner)).all()
+    return {row.provider: row.ciphertext for row in rows}
+
+
 def clear_owner(session: Session, owner: str) -> None:
-    """Remove every row belonging to one owner."""
+    """Remove every row belonging to one owner.
+
+    The encrypted API keys stay: they are service credentials, not learning
+    data, so a reset or a restored backup must not silently break the AI
+    features.
+    """
     set_ids = session.scalars(select(AiSet.id).where(AiSet.owner_id == owner)).all()
     if set_ids:
         session.execute(delete(AiSetQuestion).where(AiSetQuestion.set_id.in_(set_ids)))
@@ -352,6 +443,7 @@ def clear_owner(session: Session, owner: str) -> None:
     session.execute(delete(Question).where(Question.owner_id == owner))
     session.execute(delete(Prefs).where(Prefs.owner_id == owner))
     session.execute(delete(Timer).where(Timer.owner_id == owner))
+    session.execute(delete(AiConfig).where(AiConfig.owner_id == owner))
 
 
 def apply_ops(session: Session, owner: str, ops: list) -> int:
@@ -414,6 +506,11 @@ def apply_ops(session: Session, owner: str, ops: list) -> int:
                 _replace_timer(session, owner, op)
             else:
                 raise InvalidOperation('未知的 timer 操作')
+        elif kind == 'aiConfig':
+            if action == 'replace':
+                _replace_ai_config(session, owner, op)
+            else:
+                raise InvalidOperation('未知的 aiConfig 操作')
         elif kind == 'aiSets':
             if action == 'upsert':
                 _upsert_ai_set(session, owner, op)
@@ -460,4 +557,7 @@ def replace_state(session: Session, owner: str, state: dict) -> None:
     if isinstance(prefs, dict):
         ops.append({'t': 'prefs', 'op': 'replace', 'row': prefs})
     ops.append({'t': 'timer', 'op': 'replace', 'row': state.get('timer')})
+    ai_config = state.get('aiConfig')
+    if isinstance(ai_config, dict):
+        ops.append({'t': 'aiConfig', 'op': 'replace', 'row': ai_config})
     apply_ops(session, owner, ops)
