@@ -13,8 +13,8 @@ import (
 // must be made upstream and the hash below updated deliberately; `wails3 task
 // sync` performs the copy and the hash update in one step.
 const (
-	indexSHA256 = "a3b07590fd5b9dd97e26c024af81fc6f911540d347d807a730c430bc081cae70"
-	indexSize   = 7532726
+	indexSHA256 = "7d08fe6b2ba679143480ad53c50e53d459eeffc0ef7df584c9bcc8c3889edce3"
+	indexSize   = 7535791
 )
 
 func diskIndex(t *testing.T) []byte {
@@ -93,6 +93,16 @@ func TestAiModuleFollowsTheCoreModule(t *testing.T) {
 	}
 	if !strings.Contains(html, "NAV.splice(4,0,['capture'") {
 		t.Error("the AI pages are not registered in the navigation")
+	}
+}
+
+func TestAboutWiring(t *testing.T) {
+	html := appHTML(t)
+	for _, needle := range []string{`meta[name="app-build"]`, `data-action="about"`,
+		"function aboutModal", "function copyAbout"} {
+		if !strings.Contains(html, needle) {
+			t.Errorf("missing about wiring marker %q", needle)
+		}
 	}
 }
 

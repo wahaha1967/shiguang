@@ -67,6 +67,15 @@ reload keeps it and the page never sees it again.
 - Clearing the sample questions (「清空数据」) keeps the stored API keys; they are service
   credentials, not study data. Remove them in the AI settings with 「清除当前服务商密钥」.
 
+## Version and build info
+
+Click 「关于 · v版本号」 (*About*) at the bottom of the sidebar to see the version, the
+build commit, the build date and the running mode. 「复制版本信息」 (*Copy version info*)
+puts all of it on the clipboard — handy when reporting a problem. Official builds stamp
+the commit and date at compile time; a development run (`go run`) shows 开发构建
+(*development build*) instead, and the read-only `file://` preview shows 离线预览
+(*offline preview*).
+
 ## File independence
 
 The app needs the local service to save data. The HTML is still a single file, but on its

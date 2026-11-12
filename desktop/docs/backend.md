@@ -30,7 +30,21 @@ in `../fixtures` are frozen samples replayed by the Go test suite.
 - `ai_config` columns that are SQL `NULL` are returned as JSON `null`; the JSON
   field names are `deepseekBase`, `deepseekText`, and so on.
 - `timer.end` and `logs.qid`/`grade`/`minutes` are omitted when absent.
-- `GET /` and `/index.html` inject the token meta tag before **every** `</head>`.
+- `GET /` and `/index.html` inject the token and build-info meta tags before
+  **every** `</head>`.
+
+## Build info
+
+- `internal/buildinfo` holds `Version` (the product version; bump it together
+  with `build/windows/info.json` and `build/windows/app.manifest`), `Commit`,
+  and `BuiltAt` (Unix seconds). `Commit`
+  and `BuiltAt` are stamped by `wails3 task windows:build` through
+  `-ldflags -X …buildinfo.Commit=<git short hash> -X …buildinfo.BuiltAt=<unix>`;
+  a plain `go run` leaves them empty.
+- The page receives `<meta name="app-build" content="版本|提交|构建日期">`, where
+  the date is rendered as `2006-01-02 上午/下午` in local time (noon starts 下午).
+  The content is HTML-escaped. The 关于 dialog reads this meta; with no meta
+  (`file://` preview) or empty fields it falls back to 开发构建 / 离线预览.
 
 ## Desktop behaviour
 

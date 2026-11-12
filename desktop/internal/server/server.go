@@ -8,11 +8,13 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"errors"
+	"html"
 	"io"
 	"net"
 	"net/http"
 	"strings"
 
+	"shiguang-study/desktop/internal/buildinfo"
 	"shiguang-study/desktop/internal/config"
 	"shiguang-study/desktop/internal/llm"
 	"shiguang-study/desktop/internal/ops"
@@ -22,6 +24,7 @@ import (
 )
 
 const TokenMeta = `<meta name="api-token" content="%s">`
+const BuildMeta = `<meta name="app-build" content="%s">`
 
 var providers = []string{"qwen", "deepseek"}
 
@@ -51,7 +54,7 @@ func New(cfg *config.Config, st *store.Store, secrets *secret.Manager, dev bool)
 	if !dev {
 		// The embedded page never changes, so render and hash it once instead
 		// of on every navigation.
-		s.page = injectToken(index, cfg.Token)
+		s.page = injectMeta(index, cfg.Token)
 		s.etag = pageETag(s.page)
 	}
 	return s, nil
@@ -306,7 +309,7 @@ func (s *Server) indexPage(w http.ResponseWriter, r *http.Request) {
 			writeError(w, http.StatusNotFound, "未找到应用页面")
 			return
 		}
-		page = injectToken(index, s.config.Token)
+		page = injectMeta(index, s.config.Token)
 		etag = pageETag(page)
 	}
 	if page == nil {
@@ -324,9 +327,10 @@ func (s *Server) indexPage(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write(page)
 }
 
-func injectToken(page []byte, token string) []byte {
-	meta := strings.ReplaceAll(TokenMeta, "%s", token)
-	return []byte(strings.ReplaceAll(string(page), "</head>", meta+"</head>"))
+func injectMeta(page []byte, token string) []byte {
+	metas := strings.ReplaceAll(TokenMeta, "%s", token) +
+		strings.ReplaceAll(BuildMeta, "%s", html.EscapeString(buildinfo.Meta()))
+	return []byte(strings.ReplaceAll(string(page), "</head>", metas+"</head>"))
 }
 
 func pageETag(page []byte) string {

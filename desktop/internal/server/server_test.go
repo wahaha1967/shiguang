@@ -11,6 +11,7 @@ import (
 	"testing"
 	"time"
 
+	"shiguang-study/desktop/internal/buildinfo"
 	"shiguang-study/desktop/internal/config"
 	"shiguang-study/desktop/internal/llm"
 	"shiguang-study/desktop/internal/ops"
@@ -518,6 +519,19 @@ func TestIndexInjectsTheApiToken(t *testing.T) {
 	response, _ = f.request("GET", "/missing.js", nil, nil)
 	if response.StatusCode != http.StatusNotFound {
 		t.Errorf("unknown path status %d", response.StatusCode)
+	}
+}
+
+func TestIndexInjectsTheBuildInfo(t *testing.T) {
+	oldCommit, oldBuiltAt := buildinfo.Commit, buildinfo.BuiltAt
+	t.Cleanup(func() { buildinfo.Commit, buildinfo.BuiltAt = oldCommit, oldBuiltAt })
+	buildinfo.Commit = "73fe8d"
+	buildinfo.BuiltAt = strconv.FormatInt(time.Date(2026, 11, 9, 15, 0, 0, 0, time.Local).Unix(), 10)
+	f := newFixture(t)
+	_, data := f.request("GET", "/", nil, nil)
+	want := `<meta name="app-build" content="` + buildinfo.Version + `|73fe8d|2026-11-09 下午">`
+	if !bytes.Contains(data, []byte(want)) {
+		t.Errorf("the build meta tag is missing, want %s", want)
 	}
 }
 

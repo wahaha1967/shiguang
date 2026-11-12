@@ -8,6 +8,10 @@ vars:
   BUILD_DIR: build/bin
   EXE_NAME: shiguang-study.exe
   APP_NAME: 拾光自习室
+  COMMIT:
+    sh: git rev-parse --short HEAD || echo unknown
+  BUILT_AT:
+    sh: powershell -NoProfile -Command "[DateTimeOffset]::Now.ToUnixTimeSeconds()"
 
 tasks:
   default:
@@ -43,7 +47,7 @@ tasks:
       - powershell -NoProfile -Command "Remove-Item -Path 'cmd/study/*.syso' -ErrorAction SilentlyContinue"
       - wails3 generate syso -arch amd64 -icon build/windows/icon.ico -manifest build/windows/app.manifest -info build/windows/info.json -out cmd/study/study_windows_amd64.syso
       - powershell -NoProfile -Command "New-Item -ItemType Directory -Force -Path '{{.BUILD_DIR}}' | Out-Null"
-      - go build -trimpath -ldflags "-s -w -H=windowsgui" -o "{{.BUILD_DIR}}/{{.EXE_NAME}}" ./cmd/study
+      - go build -trimpath -ldflags "-s -w -H=windowsgui -X shiguang-study/desktop/internal/buildinfo.Commit={{.COMMIT}} -X shiguang-study/desktop/internal/buildinfo.BuiltAt={{.BUILT_AT}}" -o "{{.BUILD_DIR}}/{{.EXE_NAME}}" ./cmd/study
 
   serve:
     desc: Start the loopback HTTP service without the desktop window

@@ -27,12 +27,13 @@
 | `desktop/web/index.html` | 上者的逐字节副本，被 Go 二进制内嵌；由 `desktop/web/embed_test.go` 哈希锁定 |
 | `desktop/tools/syncpage/` | 同步工具：把 `src/app/index.html` 逐字节复制到 `desktop/web/index.html` 并刷新哈希锁 |
 | `desktop/cmd/study/` | 入口与命令行参数（`--serve` / `--port` / `--open`） |
-| `desktop/internal/server/` | 路由、Bearer 鉴权、token 注入、Host 白名单、缓存头、错误映射 |
+| `desktop/internal/server/` | 路由、Bearer 鉴权、token 与构建信息注入、Host 白名单、缓存头、错误映射 |
 | `desktop/internal/ops/` | 校验、事务、状态组装（落库经 `/api/ops`） |
 | `desktop/internal/store/` | SQLite 连接、DDL、表结构 |
 | `desktop/internal/secret/` | `.env` 解析、`SHIGUANG_SECRET`、AES-256-GCM 加解密、预览 |
 | `desktop/internal/llm/` | 千问 / DeepSeek 端点白名单、禁重定向转发、限额、密钥脱敏 |
 | `desktop/internal/config/` | 数据目录、token、owner id |
+| `desktop/internal/buildinfo/` | 版本 / 提交 / 构建日期（`windows:build` 经 ldflags 注入，写入页面 meta） |
 | `desktop/internal/app/` | Wails 窗口、生命周期、单实例互斥、HTTP 服务超时 |
 | `desktop/fixtures/` | 冻结的黄金 JSON 样本，被 Go 测试回放 |
 | `desktop/build/windows/` | 图标、清单、版本资源（`wails3 generate syso` 注入） |
