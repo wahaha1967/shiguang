@@ -1,0 +1,12 @@
+# Normalize every text file to LF in the repository and in the working tree.
+# The eol attribute overrides core.autocrlf, so Git no longer promises to
+# rewrite the working copy to CRLF on Windows and stops warning about it.
+* text=auto eol=lf
+
+# The application page is hash-locked: desktop/web/embed_test.go records the
+# exact SHA-256 and size of the shipped copy. Any end-of-line conversion during
+# a checkout would silently break that lock, so the page and its source of
+# truth are marked as binary text (-text) and must survive byte for byte.
+# These rules come last so they win over the "* text=auto eol=lf" rule above.
+/src/app/index.html -text
+/desktop/web/index.html -text

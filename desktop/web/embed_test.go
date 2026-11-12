@@ -10,7 +10,8 @@ import (
 )
 
 // The page is a byte-for-byte copy of src/app/index.html. Any functional edit
-// must be made upstream and the hash below updated deliberately.
+// must be made upstream and the hash below updated deliberately; `wails3 task
+// sync` performs the copy and the hash update in one step.
 const (
 	indexSHA256 = "a3b07590fd5b9dd97e26c024af81fc6f911540d347d807a730c430bc081cae70"
 	indexSize   = 7532726

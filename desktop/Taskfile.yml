@@ -25,9 +25,20 @@ tasks:
     cmds:
       - go vet ./...
 
+  sync:
+    desc: Copy the UI source of truth into the embedded copy and refresh the hash lock
+    cmds:
+      - go run ./tools/syncpage
+      - go test ./web/
+
+  sync:check:
+    desc: Fail when the embedded copy or the hash lock is stale
+    cmds:
+      - go run ./tools/syncpage -check
+
   windows:build:
     desc: Generate Windows resources and build the desktop executable
-    deps: [test]
+    deps: [sync:check, test]
     cmds:
       - powershell -NoProfile -Command "Remove-Item -Path 'cmd/study/*.syso' -ErrorAction SilentlyContinue"
       - wails3 generate syso -arch amd64 -icon build/windows/icon.ico -manifest build/windows/app.manifest -info build/windows/info.json -out cmd/study/study_windows_amd64.syso

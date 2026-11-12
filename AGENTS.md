@@ -15,7 +15,7 @@
 | 与旧后端的行为差异、桌面版加固项 | `desktop/docs/parity.md` |
 | AI 行为、服务商转发、白名单 | `desktop/internal/llm/llm.go` + `docs/ai-guide.md` |
 | 复习/积分数值、硬性上限 | `docs/user-guide.md` + 前端 `index.html` |
-| 跑测试、构建、打包 | `desktop/Taskfile.yml`（`wails3 task test/vet/windows:build/package/serve`） |
+| 跑测试、构建、打包 | `desktop/Taskfile.yml`（`wails3 task test/vet/sync/sync:check/windows:build/package/serve`） |
 | 面向使用者的行为 / Windows 使用说明 | `docs/user-guide.md`、`docs/ai-guide.md`、`desktop/使用说明.txt` |
 
 ## 目录地图
@@ -25,6 +25,7 @@
 | `README.md` / `README_zh.md` | 仓库门面：定位、结构、构建、安全与许可（英文基准 + 中文对照，两版章节一一对应） |
 | `src/app/index.html` | **前端本体（约 7.5 MB）**，UI 的唯一真源：界面 + 核心逻辑 + AI 逻辑 + 内置 PDF.js |
 | `desktop/web/index.html` | 上者的逐字节副本，被 Go 二进制内嵌；由 `desktop/web/embed_test.go` 哈希锁定 |
+| `desktop/tools/syncpage/` | 同步工具：把 `src/app/index.html` 逐字节复制到 `desktop/web/index.html` 并刷新哈希锁 |
 | `desktop/cmd/study/` | 入口与命令行参数（`--serve` / `--port` / `--open`） |
 | `desktop/internal/server/` | 路由、Bearer 鉴权、token 注入、Host 白名单、缓存头、错误映射 |
 | `desktop/internal/ops/` | 校验、事务、状态组装（落库经 `/api/ops`） |
@@ -47,6 +48,8 @@
 cd desktop
 wails3 task test            # go test ./...（含 fixtures 回放、哈希锁、静态断言）
 wails3 task vet             # go vet ./...
+wails3 task sync            # 复制 src/app/index.html → desktop/web/index.html，并刷新哈希锁
+wails3 task sync:check      # 只校验副本与哈希锁是否最新（构建前会自动执行）
 wails3 task windows:build   # build/bin/shiguang-study.exe（-H windowsgui，无控制台窗口）
 wails3 task package         # dist/拾光自习室/… + windows-x64 zip
 wails3 task serve           # 仅本机 HTTP（127.0.0.1:4312），调试用
@@ -58,7 +61,8 @@ wails3 task serve           # 仅本机 HTTP（127.0.0.1:4312），调试用
 
 ## 红线（违反即缺陷）
 
-- **前端单文件 + 哈希锁**：改 UI 只改 `src/app/index.html`，再逐字节复制到 `desktop/web/index.html`，并**有意地**更新 `desktop/web/embed_test.go` 的 `indexSHA256` / `indexSize`，否则 `go test ./web/` 失败。全文件只有一个内联 `<script>`，**AI 段必须排在核心段之后**；**禁手改 PDF.js base64 资源块**。
+- **前端单文件 + 哈希锁**：改 UI 只改 `src/app/index.html`，再逐字节复制到 `desktop/web/index.html`，并**有意地**更新 `desktop/web/embed_test.go` 的 `indexSHA256` / `indexSize`，否则 `go test ./web/` 失败。复制与改哈希这两步已由 `wails3 task sync` 自动化（工具在 `desktop/tools/syncpage`），**不要手改** `desktop/web/index.html`；`wails3 task sync:check` 只做校验，`windows:build` 会先跑它。全文件只有一个内联 `<script>`，**AI 段必须排在核心段之后**；**禁手改 PDF.js base64 资源块**。
+- **页面字节不可被换行转换**：`.gitattributes` 用 `* text=auto eol=lf` 统一文本文件为 LF（顺带压掉 `core.autocrlf` 的 CRLF 警告），并把 `src/app/index.html` 与 `desktop/web/index.html` 标为 `-text`（规则放在最后以覆盖前者），否则签出时字节会被改写、哈希锁失效。
 - **唯一写入口是前端 `commit(fn)`**；改数据结构必须同步改前端 `validate()` 与后端 `desktop/internal/ops` 的校验。
 - **API Key 只存后端密文**：绝不把明文 Key 写进 HTML、备份、文档、日志或错误信息；`/api/chat` 拒绝请求体注入密钥；上游错误对密钥脱敏（`[密钥已隐藏]`）。
 - **服务商白名单 + 禁重定向不可放宽**：只接受千问 / DeepSeek 官方 HTTPS 端点。

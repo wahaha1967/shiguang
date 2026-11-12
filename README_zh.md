@@ -27,6 +27,7 @@ Node 运行时。
 │   ├── fixtures/           Go 测试回放的黄金 JSON（冻结样本）
 │   ├── build/windows/      图标、清单与注入 .syso 的版本资源
 │   ├── docs/parity.md      与旧后端有意保留的行为差异
+│   ├── tools/syncpage/     把 UI 真源复制进 web/ 并刷新哈希锁的同步工具
 │   ├── Taskfile.yml        构建 / 测试 / 打包任务
 │   └── 使用说明.txt         面向使用者的 Windows 说明
 ├── docs/                   用户指南、AI 指南与桌面版移植计划
@@ -36,7 +37,8 @@ Node 运行时。
 `src/app/index.html` 是界面的唯一真源。`desktop/web/index.html` 是它的逐字节副本，被 Go
 二进制内嵌；`desktop/web/embed_test.go` 对其做哈希锁定。因此改动界面的流程是：先改
 `src/app/index.html`，再复制到 `desktop/web/`，并**有意地**更新该测试里的
-`indexSHA256`。直接用浏览器打开 HTML（`file://`）只是只读预览：能看示例数据，但不能保存。
+`indexSHA256`；`wails3 task sync` 会把复制与改哈希合成一步。直接用浏览器打开 HTML
+（`file://`）只是只读预览：能看示例数据，但不能保存。
 
 `desktop/internal/` 下的 Go 包职责：
 
@@ -70,13 +72,15 @@ Node 运行时。
 cd desktop
 wails3 task test              # go test ./...
 wails3 task vet               # go vet ./...
+wails3 task sync              # 把 src/app/index.html 复制进 web/ 并刷新哈希锁
+wails3 task sync:check        # 只校验副本与哈希锁是否最新
 wails3 task windows:build     # build/bin/shiguang-study.exe
 wails3 task package           # dist/拾光自习室/… 以及 windows-x64 zip
 wails3 task serve             # 仅本机 HTTP（127.0.0.1:4312），调试用
 ```
 
 `windows:build` 会先生成清单/版本 `.syso`，再用 `-H windowsgui` 构建，因此不会出现控制台
-窗口；该任务以测试套件为前置依赖。
+窗口；该任务以测试套件与 `sync:check` 校验为前置依赖，页面副本过期时构建会直接失败。
 
 使用者直接双击 `拾光自习室.exe` 即可（见 [`desktop/使用说明.txt`](desktop/使用说明.txt)）。
 
@@ -149,9 +153,11 @@ go run ./cmd/study            # 桌面窗口，随机回环端口
 
 ## 资源哈希锁
 
-不要直接修改 `desktop/web/index.html`。任何功能改动都应落在 `src/app/index.html`，并且
-必须**有意地**更新 `desktop/web/embed_test.go` 中的 `indexSHA256`，否则 `go test ./web/`
-会失败。
+不要直接修改 `desktop/web/index.html`。任何功能改动都应落在 `src/app/index.html`，然后运行
+`wails3 task sync`：它会复制文件，并**有意地**更新 `desktop/web/embed_test.go` 中的
+`indexSHA256` 与 `indexSize`。否则 `go test ./web/` 与 `wails3 task sync:check` 都会失败。
+`.gitattributes` 用 `* text=auto eol=lf` 把所有文本文件统一为 LF，并把两个页面文件标为
+`-text`，签出时不会被改写字节，哈希锁始终有效。
 
 ## 相关文档
 

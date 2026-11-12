@@ -29,6 +29,7 @@ Identifiers and code comments are in English; this file is the English reference
 │   ├── fixtures/           golden JSON replayed by the Go tests (frozen sample data)
 │   ├── build/windows/      icon, manifest, and version resources for the .syso
 │   ├── docs/parity.md      intentional behaviour differences from the original backend
+│   ├── tools/syncpage/     copies the UI source into web/ and refreshes the hash lock
 │   ├── Taskfile.yml        build / test / package tasks
 │   └── 使用说明.txt         end-user Windows instructions
 ├── docs/                   user guide, AI guide, and the desktop port plan
@@ -38,7 +39,8 @@ Identifiers and code comments are in English; this file is the English reference
 `src/app/index.html` is the single source of truth for the UI. `desktop/web/index.html` is a
 byte-for-byte copy that the Go binary embeds; `desktop/web/embed_test.go` hash-locks it, so
 editing the page means updating `src/app/index.html`, re-copying it into `desktop/web/`, and
-deliberately updating `indexSHA256` in that test. Opening the HTML directly (`file://`) is a
+deliberately updating `indexSHA256` in that test. `wails3 task sync` performs the copy and the
+hash update in one step. Opening the HTML directly (`file://`) is a
 read-only preview: it shows the sample data but cannot save.
 
 The Go packages under `desktop/internal/`:
@@ -74,13 +76,16 @@ To **build**:
 cd desktop
 wails3 task test              # go test ./...
 wails3 task vet               # go vet ./...
+wails3 task sync              # copy src/app/index.html into web/ and refresh the hash lock
+wails3 task sync:check        # only verify the copy and the hash lock
 wails3 task windows:build     # build/bin/shiguang-study.exe
 wails3 task package           # dist/拾光自习室/… plus a windows-x64 zip
 wails3 task serve             # loopback HTTP only, for debugging (127.0.0.1:4312)
 ```
 
 `windows:build` generates the manifest/version `.syso` first, then builds with
-`-H windowsgui` so no console window appears. The task runs the test suite as a dependency.
+`-H windowsgui` so no console window appears. The task runs the test suite and the
+`sync:check` guard as dependencies, so a stale copy of the page fails the build.
 End users double-click `拾光自习室.exe` (see [`desktop/使用说明.txt`](desktop/使用说明.txt)).
 
 To run from source:
@@ -166,8 +171,11 @@ Intentional differences from the original backend are listed in
 ## Asset hash lock
 
 `desktop/web/index.html` must not be edited directly. Any functional change belongs in
-`src/app/index.html` and must update `indexSHA256` in `desktop/web/embed_test.go`
-deliberately; `go test ./web/` fails otherwise.
+`src/app/index.html`; run `wails3 task sync` to copy it and to update `indexSHA256` and
+`indexSize` in `desktop/web/embed_test.go` deliberately. `go test ./web/` and
+`wails3 task sync:check` fail otherwise. `.gitattributes` normalizes every text file to LF
+(`* text=auto eol=lf`) and marks the two page files as `-text`, so a checkout never rewrites
+their bytes and the lock stays valid.
 
 ## Documentation
 
