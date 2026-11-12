@@ -71,6 +71,6 @@ reload keeps it and the page never sees it again.
 
 The app needs the local service to save data. The HTML is still a single file, but on its
 own it is a read-only preview. The Go desktop app embeds the page and runs the local
-loopback service itself; no Python, uv, or Node runtime is needed.
+loopback service itself; no extra runtime is needed.
 
 Read [ai-guide.md](ai-guide.md) before using the AI features.

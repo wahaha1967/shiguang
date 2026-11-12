@@ -1,5 +1,5 @@
-// Package secret loads the .env file and encrypts provider keys with
-// AES-256-GCM in exactly the format written by the Python backend.
+// Package secret loads the .env file and encrypts provider keys with AES-256-GCM.
+// The ciphertext is base64(nonce || sealed), keyed by sha256(SHIGUANG_SECRET).
 package secret
 
 import (
@@ -37,7 +37,7 @@ func NewManager(dataDir string) *Manager {
 	return &Manager{DataDir: dataDir}
 }
 
-// ParseEnv parses KEY=VALUE lines the way the Python backend does.
+// ParseEnv parses KEY=VALUE lines, skipping blank lines and # comments.
 func ParseEnv(text string) map[string]string {
 	values := map[string]string{}
 	for _, raw := range strings.Split(text, "\n") {

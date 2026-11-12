@@ -55,7 +55,7 @@ func Load(dataDir string) (*Config, error) {
 	}, nil
 }
 
-// OwnerID is the stable per-token data space key used by the Python backend.
+// OwnerID is the stable per-token data space key: the first 16 hex chars of sha256(token).
 func OwnerID(token string) string {
 	sum := sha256.Sum256([]byte(token))
 	return hex.EncodeToString(sum[:])[:16]

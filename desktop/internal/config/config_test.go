@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestOwnerIDMatchesPython(t *testing.T) {
+func TestOwnerIDFormat(t *testing.T) {
 	if got := OwnerID("test-token"); got != "4c5dc9b7708905f7" {
 		t.Fatalf("OwnerID = %q", got)
 	}

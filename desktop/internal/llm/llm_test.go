@@ -70,7 +70,7 @@ func decodeRaw(t *testing.T, raw json.RawMessage) any {
 	return value
 }
 
-func TestEndpointAllowlistMatchesPython(t *testing.T) {
+func TestEndpointAllowlist(t *testing.T) {
 	for _, testCase := range loadFixture(t).Endpoints {
 		provider, err := EndpointProvider(testCase.Value)
 		if testCase.Error == "" {
@@ -170,7 +170,7 @@ func jsonResponse(status int, payload []byte) *http.Response {
 	}
 }
 
-func TestUpstreamMatchesPythonFixtures(t *testing.T) {
+func TestUpstreamMatchesFixtures(t *testing.T) {
 	for _, testCase := range loadFixture(t).Upstream {
 		t.Run(testCase.Name, func(t *testing.T) {
 			var payload []byte

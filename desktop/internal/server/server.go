@@ -362,8 +362,8 @@ func decodeObject(w http.ResponseWriter, r *http.Request) (map[string]any, error
 	return payload, nil
 }
 
-// falsy mirrors Python's truthiness so that `payload.get('ops') or []` keeps
-// accepting `false`, `0`, `""` and `{}` as an empty batch.
+// falsy treats `false`, `0`, `""` and `{}` as an empty batch, so a missing or
+// empty `ops` field is accepted rather than rejected.
 func falsy(value any) bool {
 	switch value := value.(type) {
 	case nil:

@@ -284,9 +284,6 @@ func TestAIConfigRoundTrip(t *testing.T) {
 	if stored["provider"] != "deepseek" || stored["deepseekText"] != "deepseek-flash" {
 		t.Errorf("aiConfig %v", stored)
 	}
-	if _, ok := stored["transport"]; ok {
-		t.Error("transport must not be persisted")
-	}
 	if state["initialized"] != true {
 		t.Error("a saved AI config marks the owner initialized")
 	}

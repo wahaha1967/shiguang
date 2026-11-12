@@ -203,67 +203,6 @@ func TestImageLengthLimit(t *testing.T) {
 	}
 }
 
-func TestLegacyTransportColumnIsMigrated(t *testing.T) {
-	path := filepath.Join(t.TempDir(), "study.db")
-	raw, err := sql.Open("sqlite", path)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if _, err := raw.Exec(`CREATE TABLE ai_config (
-		owner_id VARCHAR(32) NOT NULL,
-		provider VARCHAR(20),
-		base TEXT,
-		vision VARCHAR(120),
-		text VARCHAR(120),
-		deepseek_base TEXT,
-		deepseek_vision VARCHAR(120),
-		deepseek_text VARCHAR(120),
-		transport VARCHAR(20) NOT NULL,
-		PRIMARY KEY (owner_id)
-	)`); err != nil {
-		t.Fatal(err)
-	}
-	if _, err := raw.Exec(`INSERT INTO ai_config (owner_id, provider, transport)
-		VALUES ('owner-a', 'qwen', 'proxy')`); err != nil {
-		t.Fatal(err)
-	}
-	raw.Close()
-
-	st, err := store.Open(path)
-	if err != nil {
-		t.Fatalf("open legacy database: %v", err)
-	}
-	defer st.Close()
-	rows, err := st.DB().Query("PRAGMA table_info(ai_config)")
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer rows.Close()
-	for rows.Next() {
-		var (
-			cid        int
-			name       string
-			columnType string
-			notNull    int
-			defaultVal sql.NullString
-			pk         int
-		)
-		if err := rows.Scan(&cid, &name, &columnType, &notNull, &defaultVal, &pk); err != nil {
-			t.Fatal(err)
-		}
-		if name == "transport" {
-			t.Fatal("transport column survived the migration")
-		}
-	}
-	state, err := ops.ReadState(st.DB(), "owner-a")
-	if err != nil {
-		t.Fatal(err)
-	}
-	if state.AIConfig == nil || state.AIConfig.Provider == nil || *state.AIConfig.Provider != "qwen" {
-		t.Fatalf("aiConfig = %+v", state.AIConfig)
-	}
-}
-
 func TestReadStateGroupsQuestionsAcrossSets(t *testing.T) {
 	st, err := store.Open(filepath.Join(t.TempDir(), "study.db"))
 	if err != nil {

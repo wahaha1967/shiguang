@@ -151,8 +151,7 @@ Cancelling stops the wait, but a request already sent to the provider may still 
 ## 6. Test scope and references
 
 The Go test suite covers the protocol, error handling, key storage and the practice flow with
-simulated model responses, and replays golden fixtures captured from the original Python
-release.
+simulated model responses, and replays frozen golden fixtures.
 
 The key handling was verified on 2026-11-11: the page sends the key once to the local
 service, the service stores only the ciphertext in SQLite (the plain key is not in the

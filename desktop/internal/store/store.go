@@ -1,4 +1,4 @@
-// Package store opens the SQLite database and keeps the Python schema intact.
+// Package store opens the SQLite database and manages its schema.
 package store
 
 import (
@@ -138,8 +138,7 @@ var schemaStatements = []string{
 	`CREATE INDEX IF NOT EXISTS ix_ai_set_questions_set_id ON ai_set_questions (set_id)`,
 }
 
-// Open creates the database when needed and applies the compatibility
-// migration that removes the retired ai_config.transport column.
+// Open creates the database and its schema when needed.
 func Open(path string) (*Store, error) {
 	if err := os.MkdirAll(filepath.Dir(path), 0o700); err != nil {
 		return nil, err
@@ -173,10 +172,6 @@ func Open(path string) (*Store, error) {
 			db.Close()
 			return nil, fmt.Errorf("create schema: %w", err)
 		}
-	}
-	if err := migrate(db); err != nil {
-		db.Close()
-		return nil, err
 	}
 	return &Store{db: db, Path: path}, nil
 }
@@ -229,73 +224,4 @@ func dataSourceName(path string) (string, error) {
 	query.Add("_pragma", "busy_timeout(5000)")
 	uri.RawQuery = query.Encode()
 	return uri.String(), nil
-}
-
-func migrate(db *sql.DB) error {
-	rows, err := db.Query("PRAGMA table_info(ai_config)")
-	if err != nil {
-		return err
-	}
-	found := false
-	for rows.Next() {
-		var (
-			cid        int
-			name       string
-			columnType string
-			notNull    int
-			defaultVal sql.NullString
-			pk         int
-		)
-		if err := rows.Scan(&cid, &name, &columnType, &notNull, &defaultVal, &pk); err != nil {
-			rows.Close()
-			return err
-		}
-		if name == "transport" {
-			found = true
-		}
-	}
-	rows.Close()
-	if !found {
-		return nil
-	}
-	if _, err := db.Exec("ALTER TABLE ai_config DROP COLUMN transport"); err == nil {
-		return nil
-	}
-	return rebuildAIConfig(db)
-}
-
-func rebuildAIConfig(db *sql.DB) error {
-	tx, err := db.Begin()
-	if err != nil {
-		return err
-	}
-	statements := []string{
-		`CREATE TABLE ai_config_new (
-			owner_id VARCHAR(32) NOT NULL,
-			provider VARCHAR(20) NOT NULL,
-			base TEXT NOT NULL,
-			vision VARCHAR(120) NOT NULL,
-			text VARCHAR(120) NOT NULL,
-			deepseek_base TEXT NOT NULL,
-			deepseek_vision VARCHAR(120) NOT NULL,
-			deepseek_text VARCHAR(120) NOT NULL,
-			PRIMARY KEY (owner_id)
-		)`,
-		`INSERT INTO ai_config_new (owner_id, provider, base, vision, text, deepseek_base,
-			deepseek_vision, deepseek_text)
-			SELECT owner_id, COALESCE(provider, 'qwen'), COALESCE(base, ''),
-				COALESCE(vision, ''), COALESCE(text, ''),
-				COALESCE(deepseek_base, ''), COALESCE(deepseek_vision, ''),
-				COALESCE(deepseek_text, '')
-			FROM ai_config`,
-		`DROP TABLE ai_config`,
-		`ALTER TABLE ai_config_new RENAME TO ai_config`,
-	}
-	for _, statement := range statements {
-		if _, err := tx.Exec(statement); err != nil {
-			_ = tx.Rollback()
-			return err
-		}
-	}
-	return tx.Commit()
 }

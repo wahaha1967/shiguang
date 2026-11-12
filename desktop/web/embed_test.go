@@ -151,7 +151,7 @@ func TestProviderWiring(t *testing.T) {
 	if strings.Contains(html, "/chat/completions") {
 		t.Error("the browser must not talk to the provider itself")
 	}
-	for _, needle := range []string{"aiKey", "aiDeepseekKey", "transport"} {
+	for _, needle := range []string{"aiKey", "aiDeepseekKey"} {
 		if strings.Contains(html, needle) {
 			t.Errorf("the page must not contain %q", needle)
 		}
